@@ -73,6 +73,17 @@ public class ClienteRestController {
 		return cliente;
 	}
 	
+	
+	@GetMapping("/clientes/provincia")
+	public  List<Provincia> provincias() 
+	
+	{
+		logger.info("inicio metodo index ");
+		List<Provincia> provincias = clienteService.findAllProvincias();
+		return provincias;
+	}
+	
+	
 	@GetMapping("/clientes/page/{page}")
 	public  Page<Cliente> index(@PathVariable Integer page) 
 	
@@ -156,6 +167,8 @@ public class ClienteRestController {
 		clienteActual.setApellido(cliente.getApellido());
 		clienteActual.setEmail(cliente.getEmail());
 		clienteActual.setFechaPrueba(cliente.getFechaPrueba());
+		clienteActual.setProvincia(cliente.getProvincia());
+		
 		clienteService.save(cliente);
 		
 		} catch (DataAccessException e) {
@@ -216,15 +229,7 @@ public class ClienteRestController {
 				
 	}
 
-	@GetMapping("/clientes/provincia")
-	public  List<Provincia> provincias() 
-	
-	{
-		logger.info("inicio metodo index ");
-		List<Provincia> provincias = clienteService.findAllProvincias();
-		return provincias;
-	}
-	
+
 	
 	
 	

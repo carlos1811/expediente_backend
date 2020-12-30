@@ -35,8 +35,6 @@ public class Expediente implements Serializable {
     @Column(name = "id_expediente")
 	private Long idExpediente;
 	
-	@Column(nullable = false)
-	@NotEmpty
 	@Size(min=1 , max = 30)
 	private String numPoliza;
 			
@@ -66,7 +64,7 @@ public class Expediente implements Serializable {
 	
 	private Integer superficieVivienda;
 	
-	private Integer estructura;
+	private String estructura;
 	
 	private Integer edificaValoraReposicion;
 	
@@ -181,11 +179,11 @@ public class Expediente implements Serializable {
 		this.superficieVivienda = superficieVivienda;
 	}
 
-	public Integer getEstructura() {
+	public String getEstructura() {
 		return estructura;
 	}
 
-	public void setEstructura(Integer estructura) {
+	public void setEstructura(String estructura) {
 		this.estructura = estructura;
 	}
 

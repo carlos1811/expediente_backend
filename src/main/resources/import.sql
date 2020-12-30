@@ -2,12 +2,12 @@
 
 
 //cliente
-INSERT INTO cliente (create_at,email,nombre) VALUES ('2020-02-02', 'carlos1811@gmail.com','carlos');
-INSERT INTO cliente (create_at,email,nombre) VALUES ('2020-02-01', 'juan@gmail.com','juan');
-INSERT INTO cliente (create_at,email,nombre) VALUES ('2020-02-01', 'pedro@gmail.com','pedro');
-INSERT INTO cliente (create_at,email,nombre) VALUES ('2020-02-01', 'marcos@gmail.com','marcos');
-INSERT INTO cliente (create_at,email,nombre) VALUES ('2020-02-01', 'javier@gmail.com','javier');
-INSERT INTO cliente (create_at,email,nombre) VALUES ('2020-02-01', 'julian@gmail.com','julian');
+INSERT INTO cliente (create_at,email,nombre,apellido) VALUES ('2020-02-02', 'carlos1811@gmail.com','carlos','rs');
+INSERT INTO cliente (create_at,email,nombre,apellido) VALUES ('2020-02-01', 'juan@gmail.com','juan','r1');
+INSERT INTO cliente (create_at,email,nombre,apellido) VALUES ('2020-02-01', 'pedro@gmail.com','pedro','r2');
+INSERT INTO cliente (create_at,email,nombre,apellido) VALUES ('2020-02-01', 'marcos@gmail.com','marcos','r3');
+INSERT INTO cliente (create_at,email,nombre,apellido) VALUES ('2020-02-01', 'javier@gmail.com','javier','r4');
+INSERT INTO cliente (create_at,email,nombre,apellido) VALUES ('2020-02-01', 'julian@gmail.com','julian','r5');
 
 
 

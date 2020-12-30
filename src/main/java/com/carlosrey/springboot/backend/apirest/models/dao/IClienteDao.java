@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
 import com.carlosrey.springboot.backend.apirest.models.entity.Provincia;
 
-public interface IClienteDao extends JpaRepository<Cliente, Long>{
+public interface IClienteDao extends	JpaRepository<Cliente, Long>{
 
 	@Query("from Provincia")
 	public List<Provincia> findAllProvincias();
