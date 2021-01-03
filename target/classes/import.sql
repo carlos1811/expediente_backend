@@ -10,16 +10,25 @@ INSERT INTO cliente (create_at,email,nombre,apellido) VALUES ('2020-02-01', 'jav
 INSERT INTO cliente (create_at,email,nombre,apellido) VALUES ('2020-02-01', 'julian@gmail.com','julian','r5');
 
 
+INSERT INTO mediador (create_at,email,nombre,apellido) VALUES ('2020-02-07', 'mediador1@gmail.com','mediador1','r5');
+INSERT INTO mediador (create_at,email,nombre,apellido) VALUES ('2020-02-07', 'mediador1@gmail.com','mediador2','r5');
+INSERT INTO mediador (create_at,email,nombre,apellido) VALUES ('2020-02-07', 'mediador1@gmail.com','mediador3','r5');
+INSERT INTO mediador (create_at,email,nombre,apellido) VALUES ('2020-02-07', 'mediador1@hotmail.es','mediador4','r5');
 
-INSERT INTO `usuarios` (username, password, enabled, nombre, apellido, email) VALUES ('andres','$2a$10$lWQ2o63av3cA2NFJ/dv/bO40kB7PnjpPlLqEM6flRqXlzQ8gQmY6O',1, 'Andres', 'Guzman','profesor@bolsadeideas.com');
-INSERT INTO `usuarios` (username, password, enabled, nombre, apellido, email) VALUES ('admin','$2a$10$lWQ2o63av3cA2NFJ/dv/bO40kB7PnjpPlLqEM6flRqXlzQ8gQmY6O',1, 'John', 'Doe','jhon.doe@bolsadeideas.com');
+
+
+INSERT INTO `usuarios` (username, password, enabled, nombre, apellido, email) VALUES ('carlos','$2a$10$lWQ2o63av3cA2NFJ/dv/bO40kB7PnjpPlLqEM6flRqXlzQ8gQmY6O',1, 'Carlos', 'R S','carlos1811@gmail.com');
+INSERT INTO `usuarios` (username, password, enabled, nombre, apellido, email) VALUES ('demo','$2a$10$lWQ2o63av3cA2NFJ/dv/bO40kB7PnjpPlLqEM6flRqXlzQ8gQmY6O',1, 'demo', 'demo','demo@gmail.com');
+INSERT INTO `usuarios` (username, password, enabled, nombre, apellido, email) VALUES ('admin','$2a$10$lWQ2o63av3cA2NFJ/dv/bO40kB7PnjpPlLqEM6flRqXlzQ8gQmY6O',1, 'John', 'lewis','jhon.doe@mail.com');
 
 INSERT INTO `roles` (nombre) VALUES ('ROLE_USER');
 INSERT INTO `roles` (nombre) VALUES ('ROLE_ADMIN');
+INSERT INTO `roles` (nombre) VALUES ('ROLE_USER2');
 
 INSERT INTO `usuarios_roles` (usuario_id, role_id) VALUES (1, 1);
-INSERT INTO `usuarios_roles` (usuario_id, role_id) VALUES (2, 2);
 INSERT INTO `usuarios_roles` (usuario_id, role_id) VALUES (2, 1);
+INSERT INTO `usuarios_roles` (usuario_id, role_id) VALUES (3, 2);
+INSERT INTO `usuarios_roles` (usuario_id, role_id) VALUES (3, 1);
 
 INSERT INTO `provincia` (provincia) VALUES ('Albacete');
 INSERT INTO `provincia` (provincia) VALUES ('Alicante/Alacant');

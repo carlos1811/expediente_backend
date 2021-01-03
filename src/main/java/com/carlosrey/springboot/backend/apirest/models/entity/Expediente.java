@@ -24,6 +24,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 @Entity
 @Table(name="expediente")
 public class Expediente implements Serializable {
@@ -38,12 +41,23 @@ public class Expediente implements Serializable {
 	@Size(min=1 , max = 30)
 	private String numPoliza;
 			
+		
+	
 	//Mediador
-	private String asegurador;
-		
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="id_mediador")
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	private Mediador asegurador;
+	
+	
 	//Cliente
-	private String tomadorSeguro;
-		
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="id_cliente")
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	private Cliente tomadorSeguro;
+	
+
+	
 	//Cliente
 	private String aseguPropietario;
 		
@@ -75,6 +89,9 @@ public class Expediente implements Serializable {
 	private Boolean activo;
 
 	
+	
+	
+	
 	public Long getIdExpediente() {
 		return idExpediente;
 	}
@@ -89,22 +106,6 @@ public class Expediente implements Serializable {
 
 	public void setNumPoliza(String numPoliza) {
 		this.numPoliza = numPoliza;
-	}
-
-	public String getAsegurador() {
-		return asegurador;
-	}
-
-	public void setAsegurador(String asegurador) {
-		this.asegurador = asegurador;
-	}
-
-	public String getTomadorSeguro() {
-		return tomadorSeguro;
-	}
-
-	public void setTomadorSeguro(String tomadorSeguro) {
-		this.tomadorSeguro = tomadorSeguro;
 	}
 
 	public String getAseguPropietario() {
@@ -218,6 +219,24 @@ public class Expediente implements Serializable {
 	public void setActivo(Boolean activo) {
 		this.activo = activo;
 	}
+
+	
+	public Cliente getTomadorSeguro() {
+		return tomadorSeguro;
+}
+	  
+	  public void setTomadorSeguro(Cliente tomadorSeguro) { 
+		  this.tomadorSeguro =  tomadorSeguro;
+		  }
+
+	public Mediador getAsegurador() {
+		return asegurador;
+	}
+
+	public void setAsegurador(Mediador asegurador) {
+		this.asegurador = asegurador;
+	}
+	 
 	
 	
 	
