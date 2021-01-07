@@ -1,11 +1,8 @@
 package com.carlosrey.springboot.backend.apirest.models.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -62,9 +58,9 @@ public class Cliente implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Domicilio domicilio;
 	
-    @OneToMany(mappedBy = "cliente",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    private List<Factura> facturas;
+  //  @OneToMany(mappedBy = "cliente",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  //  @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+  //  private List<Factura> facturas;
       
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="id_provincia")
@@ -73,7 +69,7 @@ public class Cliente implements Serializable {
        
 	public Cliente() {
 
-		this.facturas = new ArrayList<>();
+//		this.facturas = new ArrayList<>();
 	}
 
 
@@ -117,16 +113,12 @@ public class Cliente implements Serializable {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-
-	public List<Factura> getFacturas() {
-		return facturas;
-	}
-
-
-	public void setFacturas(List<Factura> facturas) {
-		this.facturas = facturas;
-	}
-
+	/*
+	 * public List<Factura> getFacturas() { return facturas; }
+	 * 
+	 * 
+	 * public void setFacturas(List<Factura> facturas) { this.facturas = facturas; }
+	 */
 	
 	
 	public Boolean getActivo() {

@@ -13,7 +13,6 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -52,9 +51,7 @@ public class ClienteRestController {
 	@Autowired
 	private IClienteService clienteService;
 
-    @Autowired
-    private Environment environment;
-    
+   
     @Autowired
     private Config config;
 	

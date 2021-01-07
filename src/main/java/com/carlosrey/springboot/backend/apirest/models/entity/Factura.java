@@ -35,7 +35,6 @@ public class Factura implements Serializable {
 	@Column(nullable = false)
 	private String nombreFactura;
 	
-	private String nombreCliente;
 	
 	private String descripcion;
 	
@@ -55,15 +54,19 @@ public class Factura implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createAt;
 
-    @JoinColumn(name="id_cliente",referencedColumnName = "id_cliente")
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    private Cliente cliente;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "factura_id")
 	private List<ItemFactura> items;
+	
+    @JoinColumn(name="id_cliente",referencedColumnName = "id_expediente")
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private Expediente expediente;
+	
+	
+	
 	
 		
 	public Factura() {
