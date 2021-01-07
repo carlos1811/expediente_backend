@@ -58,38 +58,16 @@ public class ClienteRestController {
     private static final Logger logger = LoggerFactory.getLogger(ClassName.class);
 
 	@GetMapping("/clientes")
-	public  List<Cliente> index() 
+	public  List<Cliente> getClientes() 
 	
 	{
 		logger.info("inicio metodo index ");
 		List<Cliente> cliente = clienteService.findAll();
 		return cliente;
 	}
-	
-	
-	@GetMapping("/clientes/provincia")
-	public  List<Provincia> provincias() 
-	
-	{
-		logger.info("inicio metodo index ");
-		List<Provincia> provincias = clienteService.findAllProvincias();
-		return provincias;
-	}
-	
-	
-	@GetMapping("/clientes/page/{page}")
-	public  Page<Cliente> index(@PathVariable Integer page) 
-	
-	{
-		logger.info("inicio metodo index Paginacion ");
-		Page<Cliente> cliente = clienteService.findAll(PageRequest.of(page,4));
-		return cliente;
-	}
-	
-	
-	
+		
 	@GetMapping("clientes/{id}")
-	public ResponseEntity<?> show(@PathVariable Long id)
+	public ResponseEntity<?> getClientesId(@PathVariable Long id)
 	{
 		logger.info("inicio metodo show ");
 		
@@ -105,6 +83,15 @@ public class ClienteRestController {
 		}
 		
 		return new ResponseEntity<Cliente>(cliente,HttpStatus.OK);
+	}
+	
+	@GetMapping("/clientes/page/{page}")
+	public  Page<Cliente> index(@PathVariable Integer page) 
+	
+	{
+		logger.info("inicio metodo index Paginacion ");
+		Page<Cliente> cliente = clienteService.findAll(PageRequest.of(page,4));
+		return cliente;
 	}
 	
 	@PostMapping("clientes")
@@ -220,6 +207,16 @@ public class ClienteRestController {
 
 		return clienteService.findAll();
 				
+	}
+	
+	
+	@GetMapping("/clientes/provincia")
+	public  List<Provincia> provincias() 
+	
+	{
+		logger.info("inicio metodo index ");
+		List<Provincia> provincias = clienteService.findAllProvincias();
+		return provincias;
 	}
 
 
