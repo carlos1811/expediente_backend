@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,8 @@ class ClienteRestControllerTest {
 	
 	public static final Cliente CLIENTE = new Cliente();
 	
+	public static Cliente CLIENTE_RESPONSE = new Cliente();
+	
 	
 	@Mock
 	IClienteService iClienteService;
@@ -32,12 +35,16 @@ class ClienteRestControllerTest {
 	
 	
 	@BeforeEach
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 		
 		MockitoAnnotations.initMocks(this);
 				
 		CLIENTE.setNombre(NAME);
 		CLIENTE.setEmail(EMAIL);
+		
+		
+
+		
 				
 	}
 	
@@ -45,13 +52,25 @@ class ClienteRestControllerTest {
 
 	@Test
 	void getClientesIdTest() {
+		
+		
+		Mockito.when(iClienteService.findById(CLIENTE_ID)).thenReturn(CLIENTE);
 		final ResponseEntity<?> response = clienteRestController.getClientesId(CLIENTE_ID);
 		
+		CLIENTE_RESPONSE  =	(Cliente) response.getBody();	
+		
 		assertEquals(response.getStatusCode(), HttpStatus.OK);
-	
-				
+		assertEquals(CLIENTE_RESPONSE.getNombre(),NAME);
+		assertEquals(CLIENTE_RESPONSE.getEmail(),EMAIL);
 		
 	}
+	
+	
+	
+	
+	
+	
+	
 
 
 }
