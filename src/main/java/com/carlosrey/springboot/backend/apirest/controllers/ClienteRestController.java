@@ -126,8 +126,12 @@ public class ClienteRestController {
 				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
-		response.put("mensaje", "El cliente ID: ".concat(cliente.getIdCliente().toString().concat("se creo correctamente")));
+			String  mensaje= "El cliente ID: ".concat(cliente.getIdCliente().toString().concat("se creo correctamente"));
+		
+		
 		response.put("cliente", clienteNew);
+		response.put("mensaje", mensaje);
+		
 		
 		return  new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 	}
@@ -158,6 +162,8 @@ public class ClienteRestController {
 				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
+		response.put("mensaje", "Actualizado correctamente el cliente");
+		
 		return  new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 	}
 	
@@ -185,13 +191,17 @@ public class ClienteRestController {
 	}
 	
 	@GetMapping("/clientes/exportar")
-	public  List<Cliente> report() throws JRException, ClassNotFoundException, SQLException 
+	public  ResponseEntity<?> report() throws JRException, ClassNotFoundException, SQLException 
 	
 	{
 		logger.info("inicio metodo report ");
+		
+		Map<String,Object> response = new HashMap<>();
 
 		String pathReport = "C:/Users/carlos pc/JaspersoftWorkspace/MyReports/Invoice.jrxml";
 
+		
+		try {
 		// Compilar el fichero jrxml
 		JasperReport report = JasperCompileManager.compileReport(pathReport);
 
@@ -205,8 +215,17 @@ public class ClienteRestController {
 		String pathDestiny = "C:/Users/carlos pc/JaspersoftWorkspace/MyReports/Invoice" + LocalDate.now() + ".pdf";
 
 		JasperExportManager.exportReportToPdfFile(print, pathDestiny);
+		
+		} catch (Exception e) {
+			
+			response.put("mensaje", "Se ha producido un problema en la exportacion");
 
-		return clienteService.findAll();
+				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
+		}
+		
+		response.put("mensaje", "la exportación ha sido correcta");
+		
+		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 				
 	}
 	
