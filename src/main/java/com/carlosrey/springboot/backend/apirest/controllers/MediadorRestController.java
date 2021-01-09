@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -13,7 +14,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
+import org.springframework.context.MessageSource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,6 +44,12 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 
+/**
+ * @author Carlos Rey Silva 
+ * https://github.com/carlos1811
+ */
+
+
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
@@ -51,8 +58,8 @@ public class MediadorRestController {
 	@Autowired
 	private IMediadorService mediadorService;
 
-    @Autowired
-    private Environment environment;
+	@Autowired
+	private MessageSource messageSource;
     
     @Autowired
     private Config config;
@@ -91,7 +98,14 @@ public class MediadorRestController {
 		try {
 			 mediador = mediadorService.findById(id);
 		} catch (Exception e) {
-			response.put("mensaje", "El mediador ID: ".concat(id.toString().concat("no existe en la base de datos!")));
+			
+			
+			String mensajeException = messageSource.getMessage("controller.mensaje8", null,
+					Locale.getDefault()) + id.toString()
+					+ messageSource.getMessage("controller.mensaje2", null, Locale.getDefault());
+			
+			
+			response.put("mensaje", mensajeException);
 			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
@@ -124,12 +138,22 @@ public class MediadorRestController {
 		try {
 			mediadorNew = mediadorService.save(mediador);
 		} catch (DataAccessException e) {
-			response.put("mensaje", "El mediador ID: ".concat(mediador.getIdMediador().toString().concat("no se pudo crear correctamente")));
+			
+			
+			String mensajeException = messageSource.getMessage("controller.mensaje8", null,
+					Locale.getDefault()) + mediador.toString()
+					+ messageSource.getMessage("controller.mensaje4", null, Locale.getDefault());
+			
+			response.put("mensaje", mensajeException);
 			response.put("errors",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
-		response.put("mensaje", "El mediador ID: ".concat(mediador.getIdMediador().toString().concat("se creo correctamente")));
+		String mensajeException = messageSource.getMessage("controller.mensaje8", null,
+				Locale.getDefault()) + mediador.toString()
+				+ messageSource.getMessage("controller.mensaje3", null, Locale.getDefault());
+		
+		response.put("mensaje", mensajeException);
 		response.put("mediador", mediadorNew);
 		
 		return  new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
@@ -152,17 +176,22 @@ public class MediadorRestController {
 		mediadorActual.setCodMediador(mediador.getCodMediador());
 		mediadorActual.setTelefono(mediador.getTelefono());
 		mediadorActual.setActivo(mediador.getActivo());
-		
-		
-		
 
 		mediadorService.save(mediador);
 		
 		} catch (DataAccessException e) {
-			response.put("mensaje", "El mediador ID: ".concat(mediador.getIdMediador().toString().concat("no existe en la base de datos!")));
+			
+			String mensajeException = messageSource.getMessage("controller.mensaje8", null,
+					Locale.getDefault()) + id.toString()
+					+ messageSource.getMessage("controller.mensaje5", null, Locale.getDefault());
+			
+			response.put("mensaje", mensajeException);
 			response.put("errors",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
 		}
+		
+		response.put("mensaje", messageSource.getMessage("controller.mensaje6", null,
+				Locale.getDefault()));
 		
 		return  new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 	}
@@ -181,12 +210,20 @@ public class MediadorRestController {
 		
 		} catch (DataAccessException e) {
 		
-			response.put("mensaje", "El mediador ID: ".concat(id.toString().concat("no existe en la base de datos!")));
+			String mensajeException = messageSource.getMessage("controller.mensaje8", null,
+					Locale.getDefault()) + id.toString()
+					+ messageSource.getMessage("controller.mensaje5", null, Locale.getDefault());
+			
+			response.put("mensaje", mensajeException);
 			response.put("errors",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
 		}
-		
-		response.put("mensaje", "El mediador ID: ".concat(id.toString().concat("ha sido eliminado con exito")));
+	
+		String mensajeException = messageSource.getMessage("controller.mensaje8", null,
+				Locale.getDefault()) + id.toString()
+				+ messageSource.getMessage("controller.mensaje7", null, Locale.getDefault());
+			
+		response.put("mensaje", mensajeException);
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 	}
 	

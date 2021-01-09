@@ -45,7 +45,5 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 				
 	}
-
-	
 	
 }

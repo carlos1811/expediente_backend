@@ -13,7 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.carlosrey.springboot.backend.apirest.models.dao.IExpedienteDao;
 import com.carlosrey.springboot.backend.apirest.models.entity.Expediente;
 
-
+/**
+ * @author Carlos Rey Silva 
+ * https://github.com/carlos1811
+ */
 
 @Service
 public class ExpedienteServiceImpl implements IExpedienteService{

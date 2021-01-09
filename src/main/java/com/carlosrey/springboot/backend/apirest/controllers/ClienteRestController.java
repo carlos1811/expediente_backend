@@ -1,10 +1,10 @@
 package com.carlosrey.springboot.backend.apirest.controllers;
 
-
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -13,6 +13,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,6 +45,12 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 
+/**
+ * @author Carlos Rey Silva 
+ * https://github.com/carlos1811
+ */
+
+
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
@@ -51,196 +59,212 @@ public class ClienteRestController {
 	@Autowired
 	private IClienteService clienteService;
 
-   
-    @Autowired
-    private Config config;
-	
-    private static final Logger logger = LoggerFactory.getLogger(ClassName.class);
+	@Autowired
+	private Config config;
+
+	@Autowired
+	private MessageSource messageSource;
+
+	private static final Logger logger = LoggerFactory.getLogger(ClassName.class);
 
 	@GetMapping("/clientes")
-	public  List<Cliente> getClientes() 
-	
+	public List<Cliente> getClientes()
+
 	{
 		logger.info("inicio metodo index ");
 		List<Cliente> cliente = clienteService.findAll();
 		return cliente;
 	}
-		
+
 	@GetMapping("clientes/{id}")
-	public ResponseEntity<?> getClientesId(@PathVariable Long id)
-	{
+	public ResponseEntity<?> getClientesId(@PathVariable Long id) {
 		logger.info("inicio metodo show ");
-		
+
 		Cliente cliente = null;
-		Map<String,Object> response = new HashMap<>();
-		
+		Map<String, Object> response = new HashMap<>();
 
 		try {
-			 cliente = clienteService.findById(id);
+			cliente = clienteService.findById(id);
 		} catch (Exception e) {
-			response.put("mensaje", "El cliente ID: ".concat(id.toString().concat("no existe en la base de datos!")));
-			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
-			//return new ResponseEntity<Cliente>(cliente,HttpStatus.NOT_FOUND);
+
+			String mensajeException = messageSource.getMessage("controller.mensaje1", null,LocaleContextHolder.getLocale()) + id.toString()
+					+ messageSource.getMessage("controller.mensaje2", null, LocaleContextHolder.getLocale());
+
+			response.put("mensaje", mensajeException);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
-		
-		return new ResponseEntity<Cliente>(cliente,HttpStatus.OK);
+
+		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/clientes/page/{page}")
-	public  Page<Cliente> index(@PathVariable Integer page) 
-	
+	public Page<Cliente> index(@PathVariable Integer page)
+
 	{
 		logger.info("inicio metodo index Paginacion ");
-		Page<Cliente> cliente = clienteService.findAll(PageRequest.of(page,4));
+		Page<Cliente> cliente = clienteService.findAll(PageRequest.of(page, 4));
 		return cliente;
 	}
-	
+
 	@PostMapping("clientes")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result)
-	{
-		
-		logger.info("inicio metodo create ");
-		
-		
-		Cliente clienteNew = null;
-		Map<String,Object> response = new HashMap<>();
-		
-		if (result.hasErrors()){
+	public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result) {
 
-			List<String> errors = result.getFieldErrors().stream().
-					map( err -> 
-					" El campo '" + err.getField() + "' " + err.getDefaultMessage()).
-					collect(Collectors.toList());
-			
+		logger.info("inicio metodo create ");
+
+		Cliente clienteNew = null;
+		Map<String, Object> response = new HashMap<>();
+
+		if (result.hasErrors()) {
+
+			List<String> errors = result.getFieldErrors().stream()
+					.map(err -> " El campo '" + err.getField() + "' " + err.getDefaultMessage())
+					.collect(Collectors.toList());
+
 			response.put("errors", errors);
-			
-			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
-		}	
-			
+
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+
 		try {
 			clienteNew = clienteService.save(cliente);
 		} catch (DataAccessException e) {
-			response.put("mensaje", "El cliente ID: ".concat(cliente.getIdCliente().toString().concat("no se pudo crear correctamente")));
-			response.put("errors",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
+			
+			String mensaje = messageSource.getMessage("controller.mensaje1", null, LocaleContextHolder.getLocale())
+					+ cliente.getIdCliente().toString()
+					+ messageSource.getMessage("controller.mensaje4", null, LocaleContextHolder.getLocale());
+			
+			response.put("mensaje", mensaje);
+			response.put("errors", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
-		
-			String  mensaje= "El cliente ID: ".concat(cliente.getIdCliente().toString().concat("se creo correctamente"));
-		
-		
+
+		String mensaje = messageSource.getMessage("controller.mensaje1", null, LocaleContextHolder.getLocale())
+				+ cliente.getIdCliente().toString()
+				+ messageSource.getMessage("controller.mensaje3", null, LocaleContextHolder.getLocale());
+
 		response.put("cliente", clienteNew);
 		response.put("mensaje", mensaje);
-		
-		
-		return  new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
+
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 
 	@PutMapping("clientes/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<?> update(@RequestBody Cliente cliente,@PathVariable Long id)
-	{
+	public ResponseEntity<?> update(@RequestBody Cliente cliente, @PathVariable Long id) {
 		logger.info("inicio metodo update ");
-		
-		Map<String,Object> response = new HashMap<>();
-		
+
+		Map<String, Object> response = new HashMap<>();
+
 		try {
-		
-		Cliente clienteActual = clienteService.findById(id);
-		
-		clienteActual.setNombre(cliente.getNombre());
-		clienteActual.setApellido(cliente.getApellido());
-		clienteActual.setEmail(cliente.getEmail());
-		clienteActual.setFechaPrueba(cliente.getFechaPrueba());
-		clienteActual.setProvincia(cliente.getProvincia());
-		
-		clienteService.save(cliente);
-		
+
+			Cliente clienteActual = clienteService.findById(id);
+
+			clienteActual.setNombre(cliente.getNombre());
+			clienteActual.setApellido(cliente.getApellido());
+			clienteActual.setEmail(cliente.getEmail());
+			clienteActual.setFechaPrueba(cliente.getFechaPrueba());
+			clienteActual.setProvincia(cliente.getProvincia());
+
+			clienteService.save(cliente);
+
 		} catch (DataAccessException e) {
-			response.put("mensaje", "El cliente ID: ".concat(cliente.getIdCliente().toString().concat("no existe en la base de datos!")));
-			response.put("errors",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
+			
+			String mensaje = messageSource.getMessage("controller.mensaje1", null, LocaleContextHolder.getLocale())
+					+ cliente.getIdCliente().toString()
+					+ messageSource.getMessage("controller.mensaje5", null, LocaleContextHolder.getLocale());
+			
+			response.put("mensaje", mensaje );
+			response.put("errors", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
-		response.put("mensaje", "Actualizado correctamente el cliente");
-		
-		return  new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
+		response.put("mensaje", messageSource.getMessage("controller.mensaje6", null, LocaleContextHolder.getLocale()) );
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("clientes/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public ResponseEntity<?> delete(@PathVariable Long id)
-	{
+	public ResponseEntity<?> delete(@PathVariable Long id) {
 		logger.info("inicio metodo delete ");
-		
-		Map<String,Object> response = new HashMap<>();
-		
+
+		Map<String, Object> response = new HashMap<>();
+
 		try {
-		
-		clienteService.delete(id);
-		
+
+			clienteService.delete(id);
+
 		} catch (DataAccessException e) {
-		
-			response.put("mensaje", "El cliente ID: ".concat(id.toString().concat("no existe en la base de datos!")));
-			response.put("errors",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
+			
+			String mensaje = messageSource.getMessage("controller.mensaje1", null, LocaleContextHolder.getLocale())
+					+ id.toString()
+					+ messageSource.getMessage("controller.mensaje5", null, LocaleContextHolder.getLocale());
+			
+			response.put("mensaje", mensaje);
+			response.put("errors", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
+
+		String mensaje = messageSource.getMessage("controller.mensaje1", null, LocaleContextHolder.getLocale())
+				+ id.toString()
+				+ messageSource.getMessage("controller.mensaje7", null, LocaleContextHolder.getLocale());		
 		
-		response.put("mensaje", "El cliente ID: ".concat(id.toString().concat("ha sido eliminado con exito")));
-		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
+		response.put("mensaje", mensaje);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
+
 	
 	@GetMapping("/clientes/exportar")
-	public  ResponseEntity<?> report() throws JRException, ClassNotFoundException, SQLException 
-	
+	public ResponseEntity<?> report() throws JRException, ClassNotFoundException, SQLException
+
 	{
 		logger.info("inicio metodo report ");
-		
-		Map<String,Object> response = new HashMap<>();
+
+		Map<String, Object> response = new HashMap<>();
 
 		String pathReport = "C:/Users/carlos pc/JaspersoftWorkspace/MyReports/Invoice.jrxml";
 
-		
 		try {
-		// Compilar el fichero jrxml
-		JasperReport report = JasperCompileManager.compileReport(pathReport);
+			// Compilar el fichero jrxml
+			JasperReport report = JasperCompileManager.compileReport(pathReport);
 
-		// Rellenamos los parámetros del informe con valores
-		Map<String, Object> parameters = new HashMap<>();
-		parameters.put("the_image", "src/main/files/the_image.png");
+			// Rellenamos los parámetros del informe con valores
+			Map<String, Object> parameters = new HashMap<>();
+			parameters.put("the_image", "src/main/files/the_image.png");
 
-		// rellenamos el informe con datos y parámetros
-		JasperPrint print = JasperFillManager.fillReport(report, parameters, config.getDataSource().getConnection());
+			// rellenamos el informe con datos y parámetros
+			JasperPrint print = JasperFillManager.fillReport(report, parameters,
+					config.getDataSource().getConnection());
 
-		String pathDestiny = "C:/Users/carlos pc/JaspersoftWorkspace/MyReports/Invoice" + LocalDate.now() + ".pdf";
+			String pathDestiny = "C:/Users/carlos pc/JaspersoftWorkspace/MyReports/Invoice" + LocalDate.now() + ".pdf";
 
-		JasperExportManager.exportReportToPdfFile(print, pathDestiny);
-		
+			JasperExportManager.exportReportToPdfFile(print, pathDestiny);
+
 		} catch (Exception e) {
+
+			String mensaje = messageSource.getMessage("controller.mensaje1", null, LocaleContextHolder.getLocale());
 			
 			response.put("mensaje", "Se ha producido un problema en la exportacion");
 
-				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
+
+		
+		
 		
 		response.put("mensaje", "la exportación ha sido correcta");
-		
-		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
-				
+
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+
 	}
-	
-	
+
 	@GetMapping("/clientes/provincia")
-	public  List<Provincia> provincias() 
-	
+	public List<Provincia> provincias()
+
 	{
 		logger.info("inicio metodo index ");
 		List<Provincia> provincias = clienteService.findAllProvincias();
 		return provincias;
 	}
 
-
-	
-	
-	
 }

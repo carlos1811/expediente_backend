@@ -10,7 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-
+/**
+ * @author Carlos Rey Silva 
+ * https://github.com/carlos1811
+ */
 
 @Entity
 @Table(name="provincia")

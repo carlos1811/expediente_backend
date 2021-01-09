@@ -19,7 +19,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-
+/**
+ * @author Carlos Rey Silva 
+ * https://github.com/carlos1811
+ */
 
 @Entity
 @Table(name="mediador")

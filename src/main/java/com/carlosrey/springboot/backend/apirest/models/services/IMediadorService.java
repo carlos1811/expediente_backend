@@ -6,7 +6,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.carlosrey.springboot.backend.apirest.models.entity.Mediador;
-
+/**
+ * @author Carlos Rey Silva 
+ * https://github.com/carlos1811
+ */
 public interface IMediadorService {
 	
 	public List<Mediador> findAll();

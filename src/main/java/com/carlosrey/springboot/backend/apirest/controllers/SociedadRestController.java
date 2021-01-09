@@ -1,15 +1,9 @@
 package com.carlosrey.springboot.backend.apirest.controllers;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -17,15 +11,11 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,17 +25,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.carlosrey.springboot.backend.apirest.configuration.Config;
 import com.carlosrey.springboot.backend.apirest.models.entity.Sociedad;
 import com.carlosrey.springboot.backend.apirest.models.services.ISociedadService;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
+
+/**
+ * @author Carlos Rey Silva 
+ * https://github.com/carlos1811
+ */
 
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
@@ -56,13 +44,7 @@ public class SociedadRestController {
 	@Autowired
 	private ISociedadService sociedadService;
 
-    @Autowired
-    private Environment environment;
-    
-    @Autowired
-    private Config config;
-	
-    private static final Logger logger = LoggerFactory.getLogger(ClassName.class);
+      private static final Logger logger = LoggerFactory.getLogger(ClassName.class);
 
 	@GetMapping("/sociedad")
 	public  List<Sociedad> index() 
