@@ -13,6 +13,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
@@ -58,12 +60,13 @@ public class ExpedienteRestController {
 	private IExpedienteService expedienteService;
 
     @Autowired
-    private Environment environment;
-    
-    @Autowired
     private Config config;
+    
+	@Autowired
+	private MessageSource messageSource;
+    
 	
-    private static final Logger logger = LoggerFactory.getLogger(ClassName.class);
+	private static final Logger logger = LoggerFactory.getLogger(ExpedienteRestController.class);
 
 	@GetMapping("/expediente")
 	public  List<Expediente> index() 
@@ -97,7 +100,12 @@ public class ExpedienteRestController {
 		try {
 			 expediente = expedienteService.findById(id);
 		} catch (Exception e) {
-			response.put("mensaje", "El expediente ID: ".concat(id.toString().concat("no existe en la base de datos!")));
+			
+			String mensaje =  messageSource.getMessage("controller.mensaje11", null,LocaleContextHolder.getLocale()) 
+					+ id.toString()
+					+ messageSource.getMessage("controller.mensaje5", null,LocaleContextHolder.getLocale()) ;
+			
+			response.put("mensaje", mensaje);
 			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
@@ -130,12 +138,21 @@ public class ExpedienteRestController {
 		try {
 			expedienteNew = expedienteService.save(expediente);
 		} catch (DataAccessException e) {
-			response.put("mensaje", "El expediente ID: ".concat(expediente.getIdExpediente().toString().concat("no se pudo crear correctamente")));
+			
+			String mensaje =  messageSource.getMessage("controller.mensaje11", null,LocaleContextHolder.getLocale()) 
+					+ expediente.getIdExpediente().toString()
+					+ messageSource.getMessage("controller.mensaje4", null,LocaleContextHolder.getLocale()) ;
+		
+			response.put("mensaje", mensaje);
 			response.put("errors",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
-		response.put("mensaje", "El expediente ID: ".concat(expediente.getIdExpediente().toString().concat("se creo correctamente")));
+		String mensaje =  messageSource.getMessage("controller.mensaje11", null,LocaleContextHolder.getLocale()) 
+				+ expediente.getIdExpediente().toString()
+				+ messageSource.getMessage("controller.mensaje3", null,LocaleContextHolder.getLocale()) ;
+		
+		response.put("mensaje", mensaje);
 		response.put("expediente", expedienteNew);
 		
 		return  new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
@@ -174,11 +191,23 @@ public class ExpedienteRestController {
 		expedienteService.save(expediente);
 		
 		} catch (DataAccessException e) {
-			response.put("mensaje", "El expediente ID: ".concat(expediente.getIdExpediente().toString().concat("no existe en la base de datos!")));
+			
+			String mensaje =  messageSource.getMessage("controller.mensaje11", null,LocaleContextHolder.getLocale()) 
+					+ expediente.getIdExpediente().toString()
+					+ messageSource.getMessage("controller.mensaje5", null,LocaleContextHolder.getLocale()) ;
+				
+			response.put("mensaje", mensaje);
 			response.put("errors",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
+				
 		}
 		
+		String mensaje =  messageSource.getMessage("controller.mensaje11", null,LocaleContextHolder.getLocale()) 
+				+ expediente.getIdExpediente().toString()
+				+ messageSource.getMessage("controller.mensaje6", null,LocaleContextHolder.getLocale()) ;
+			
+		response.put("mensaje", mensaje);		
+ 		
 		return  new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 	}
 	
@@ -205,31 +234,7 @@ public class ExpedienteRestController {
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 	}
 	
-	@GetMapping("/expediente/exportar")
-	public  List<Expediente> report() throws JRException, ClassNotFoundException, SQLException 
-	
-	{
-		logger.info("inicio metodo report ");
 
-		String pathReport = "C:/Users/carlos pc/JaspersoftWorkspace/MyReports/Invoice.jrxml";
-
-		// Compilar el fichero jrxml
-		JasperReport report = JasperCompileManager.compileReport(pathReport);
-
-		// Rellenamos los parámetros del informe con valores
-		Map<String, Object> parameters = new HashMap<>();
-		parameters.put("the_image", "src/main/files/the_image.png");
-
-		// rellenamos el informe con datos y parámetros
-		JasperPrint print = JasperFillManager.fillReport(report, parameters, config.getDataSource().getConnection());
-
-		String pathDestiny = "C:/Users/carlos pc/JaspersoftWorkspace/MyReports/Invoice" + LocalDate.now() + ".pdf";
-
-		JasperExportManager.exportReportToPdfFile(print, pathDestiny);
-
-		return expedienteService.findAll();
-				
-	}
 
 	
 }

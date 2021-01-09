@@ -65,20 +65,20 @@ public class ClienteRestController {
 	@Autowired
 	private MessageSource messageSource;
 
-	private static final Logger logger = LoggerFactory.getLogger(ClassName.class);
+	private static final Logger logger = LoggerFactory.getLogger(ClienteRestController.class);
 
 	@GetMapping("/clientes")
 	public List<Cliente> getClientes()
 
 	{
-		logger.info("inicio metodo index ");
+		logger.info("inicio metodo getClientes ");
 		List<Cliente> cliente = clienteService.findAll();
 		return cliente;
 	}
 
 	@GetMapping("clientes/{id}")
 	public ResponseEntity<?> getClientesId(@PathVariable Long id) {
-		logger.info("inicio metodo show ");
+		logger.info("inicio metodo getClientesId ");
 
 		Cliente cliente = null;
 		Map<String, Object> response = new HashMap<>();
@@ -242,17 +242,12 @@ public class ClienteRestController {
 
 		} catch (Exception e) {
 
-			String mensaje = messageSource.getMessage("controller.mensaje1", null, LocaleContextHolder.getLocale());
-			
-			response.put("mensaje", "Se ha producido un problema en la exportacion");
+			response.put("mensaje", messageSource.getMessage("controller.mensaje1", null, LocaleContextHolder.getLocale()));
 
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
-
-		
-		
-		
-		response.put("mensaje", "la exportación ha sido correcta");
+	
+		response.put("mensaje",messageSource.getMessage("controller.mensaje10", null, LocaleContextHolder.getLocale()));
 
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 

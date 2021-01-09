@@ -2,6 +2,8 @@ package com.carlosrey.springboot.backend.apirest.models.services;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,8 @@ import com.carlosrey.springboot.backend.apirest.models.entity.Sociedad;
 @Service
 public class SociedadServiceImpl implements ISociedadService{
 
+	private static final Logger logger = LoggerFactory.getLogger(SociedadServiceImpl.class);
+	
 	@Autowired
 	private ISociedadDao sociedadDao;
 	
@@ -22,7 +26,7 @@ public class SociedadServiceImpl implements ISociedadService{
 	@Override
 	@Transactional(readOnly = true)
 	public List<Sociedad> findAll() {
-		
+		logger.info("inicio metodo findAll ");
 		return (List<Sociedad>) sociedadDao.findAll();
 	}
 
@@ -30,21 +34,21 @@ public class SociedadServiceImpl implements ISociedadService{
 	@Override
 	@Transactional(readOnly = true)	
 	public Sociedad findById(Long id) {
-		// TODO Auto-generated method stub
+		logger.info("inicio metodo findById ");
 		return sociedadDao.findById(id).orElse(null);
 	}
 
 	@Override	
 	@Transactional
 	public Sociedad save(Sociedad sociedad) {
-		// TODO Auto-generated method stub
+		logger.info("inicio metodo save ");
 		return sociedadDao.save(sociedad);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		logger.info("inicio metodo delete ");
 		sociedadDao.deleteById(id);
 	}
 

@@ -14,55 +14,52 @@ import com.carlosrey.springboot.backend.apirest.models.dao.IExpedienteDao;
 import com.carlosrey.springboot.backend.apirest.models.entity.Expediente;
 
 /**
- * @author Carlos Rey Silva 
- * https://github.com/carlos1811
+ * @author Carlos Rey Silva https://github.com/carlos1811
  */
 
 @Service
-public class ExpedienteServiceImpl implements IExpedienteService{
+public class ExpedienteServiceImpl implements IExpedienteService {
 
 	@Autowired
 	private IExpedienteDao ExpedienteDao;
-	
-	private Logger logger = LoggerFactory.getLogger(usuarioService.class);
-	
-	
+
+	private static final Logger logger = LoggerFactory.getLogger(ExpedienteServiceImpl.class);
+
 	@Override
 	@Transactional(readOnly = true)
 	public List<Expediente> findAll() {
-		
-		
+		logger.info("inicio metodo findAll ");
+
 		return (List<Expediente>) ExpedienteDao.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Page<Expediente> findAll(Pageable pageable) {
+		logger.info("inicio metodo findAll ");
+
 		return ExpedienteDao.findAll(pageable);
 	}
-	
-	
+
 	@Override
-	@Transactional(readOnly = true)	
+	@Transactional(readOnly = true)
 	public Expediente findById(Long id) {
-		// TODO Auto-generated method stub
+		logger.info("inicio metodo findById ");
 		return ExpedienteDao.findById(id).orElse(null);
 	}
 
-	@Override	
+	@Override
 	@Transactional
 	public Expediente save(Expediente Expediente) {
-		// TODO Auto-generated method stub
+		logger.info("inicio metodo save ");
 		return ExpedienteDao.save(Expediente);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		logger.info("inicio metodo delete ");
 		ExpedienteDao.deleteById(id);
 	}
-
-	
 
 }

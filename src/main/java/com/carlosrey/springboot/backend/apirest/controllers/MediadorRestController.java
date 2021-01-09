@@ -64,7 +64,7 @@ public class MediadorRestController {
     @Autowired
     private Config config;
 	
-    private static final Logger logger = LoggerFactory.getLogger(ClassName.class);
+    private static final Logger logger = LoggerFactory.getLogger(MediadorRestController.class);
 
 	@GetMapping("/mediador")
 	public  List<Mediador> index() 
@@ -227,31 +227,6 @@ public class MediadorRestController {
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 	}
 	
-	@GetMapping("/mediador/exportar")
-	public  List<Mediador> report() throws JRException, ClassNotFoundException, SQLException 
-	
-	{
-		logger.info("inicio metodo report ");
-
-		String pathReport = "C:/Users/carlos pc/JaspersoftWorkspace/MyReports/Invoice.jrxml";
-
-		// Compilar el fichero jrxml
-		JasperReport report = JasperCompileManager.compileReport(pathReport);
-
-		// Rellenamos los parámetros del informe con valores
-		Map<String, Object> parameters = new HashMap<>();
-		parameters.put("the_image", "src/main/files/the_image.png");
-
-		// rellenamos el informe con datos y parámetros
-		JasperPrint print = JasperFillManager.fillReport(report, parameters, config.getDataSource().getConnection());
-
-		String pathDestiny = "C:/Users/carlos pc/JaspersoftWorkspace/MyReports/Invoice" + LocalDate.now() + ".pdf";
-
-		JasperExportManager.exportReportToPdfFile(print, pathDestiny);
-
-		return mediadorService.findAll();
-				
-	}
 
 	
 }

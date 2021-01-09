@@ -44,7 +44,7 @@ public class SociedadRestController {
 	@Autowired
 	private ISociedadService sociedadService;
 
-      private static final Logger logger = LoggerFactory.getLogger(ClassName.class);
+      private static final Logger logger = LoggerFactory.getLogger(SociedadRestController.class);
 
 	@GetMapping("/sociedad")
 	public  List<Sociedad> index() 

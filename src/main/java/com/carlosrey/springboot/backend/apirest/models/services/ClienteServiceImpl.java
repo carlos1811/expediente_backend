@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.carlosrey.springboot.backend.apirest.controllers.ClienteRestController;
 import com.carlosrey.springboot.backend.apirest.models.dao.IClienteDao;
 import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
 import com.carlosrey.springboot.backend.apirest.models.entity.Provincia;
@@ -23,13 +24,13 @@ public class ClienteServiceImpl implements IClienteService{
 	@Autowired
 	private IClienteDao clienteDao;
 	
-	private Logger logger = LoggerFactory.getLogger(usuarioService.class);
+	private static final Logger logger = LoggerFactory.getLogger(ClienteServiceImpl.class);
 	
 	
 	@Override
 	@Transactional(readOnly = true)
 	public List<Cliente> findAll() {
-		
+		logger.info("inicio metodo findAll ");
 		
 		return (List<Cliente>) clienteDao.findAll();
 	}
@@ -37,6 +38,8 @@ public class ClienteServiceImpl implements IClienteService{
 	@Override
 	@Transactional(readOnly = true)
 	public Page<Cliente> findAll(Pageable pageable) {
+		logger.info("inicio metodo pageable ");
+		
 		return clienteDao.findAll(pageable);
 	}
 	
@@ -44,28 +47,27 @@ public class ClienteServiceImpl implements IClienteService{
 	@Override
 	@Transactional(readOnly = true)	
 	public Cliente findById(Long id) {
-		// TODO Auto-generated method stub
+		logger.info("inicio metodo findById ");
 		return clienteDao.findById(id).orElse(null);
 	}
 
 	@Override	
 	@Transactional
 	public Cliente save(Cliente cliente) {
-		// TODO Auto-generated method stub
+		logger.info("inicio metodo save ");
 		return clienteDao.save(cliente);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		logger.info("inicio metodo delete ");
 		clienteDao.deleteById(id);
 	}
 
 	@Override
 	public List<Provincia> findAllProvincias() {
-		// TODO Auto-generated method stub
-		
+		logger.info("inicio metodo findAllProvincias ");
 		return clienteDao.findAllProvincias();
 		
 	}
