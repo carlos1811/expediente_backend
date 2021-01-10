@@ -67,7 +67,7 @@ public class MediadorRestController {
     private static final Logger logger = LoggerFactory.getLogger(MediadorRestController.class);
 
 	@GetMapping("/mediador")
-	public  List<Mediador> index() 
+	public  List<Mediador> findAllMediador() 
 	
 	{
 		logger.info("inicio metodo index ");
@@ -75,6 +75,9 @@ public class MediadorRestController {
 		return mediador;
 	}
 	
+	
+	
+	/* Se comenta por si se utilizara en el futuro
 	@GetMapping("/mediador/page/{page}")
 	public  Page<Mediador> index(@PathVariable Integer page) 
 	
@@ -83,11 +86,11 @@ public class MediadorRestController {
 		Page<Mediador> mediador = mediadorService.findAll(PageRequest.of(page,4));
 		return mediador;
 	}
-	
+	*/
 	
 	
 	@GetMapping("mediador/{id}")
-	public ResponseEntity<?> show(@PathVariable Long id)
+	public ResponseEntity<?> findByMediador(@PathVariable Long id)
 	{
 		logger.info("inicio metodo show ");
 		

@@ -1,5 +1,5 @@
 package com.carlosrey.springboot.backend.apirest.config;
-/*
+
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,8 @@ public class MvcConfig implements WebMvcConfigurer {
     SessionLocaleResolver localeResolver = new SessionLocaleResolver();
     
     //De momento se configura desde springboot la configuración de mensajes del backend
-    localeResolver.setDefaultLocale(new Locale(environment.getProperty("spring.datasource.url")));
+    //localeResolver.setDefaultLocale(new Locale(environment.getProperty("spring.datasource.url")));
+    localeResolver.setDefaultLocale(Locale.getDefault());
     return localeResolver;
   }
 
@@ -40,4 +41,4 @@ public class MvcConfig implements WebMvcConfigurer {
     registry.addInterceptor(localeChangeInterceptor());
   }
 
-}*/
+}

@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -16,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -34,10 +31,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.carlosrey.springboot.backend.apirest.configuration.Config;
 import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
-import com.carlosrey.springboot.backend.apirest.models.entity.Provincia;
 import com.carlosrey.springboot.backend.apirest.models.services.IClienteService;
 
-import javassist.bytecode.stackmap.TypeData.ClassName;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -97,6 +92,9 @@ public class ClienteRestController {
 		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
 	}
 
+
+	//No se usa en front, se mantiene el codigo por si hubiera un front con paginacion
+	/*
 	@GetMapping("/clientes/page/{page}")
 	public Page<Cliente> index(@PathVariable Integer page)
 
@@ -104,7 +102,7 @@ public class ClienteRestController {
 		logger.info("inicio metodo index Paginacion ");
 		Page<Cliente> cliente = clienteService.findAll(PageRequest.of(page, 4));
 		return cliente;
-	}
+	}*/
 
 	@PostMapping("clientes")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -253,13 +251,13 @@ public class ClienteRestController {
 
 	}
 
-	@GetMapping("/clientes/provincia")
+	/*@GetMapping("/clientes/provincia")
 	public List<Provincia> provincias()
 
 	{
 		logger.info("inicio metodo index ");
 		List<Provincia> provincias = clienteService.findAllProvincias();
 		return provincias;
-	}
+	}*/
 
 }

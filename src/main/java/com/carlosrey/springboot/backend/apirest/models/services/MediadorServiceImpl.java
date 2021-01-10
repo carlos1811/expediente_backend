@@ -21,16 +21,15 @@ import com.carlosrey.springboot.backend.apirest.models.entity.Mediador;
 @Service
 public class MediadorServiceImpl implements IMediadorService{
 
+	private static final Logger logger = LoggerFactory.getLogger(MediadorServiceImpl.class);
+	
 	@Autowired
 	private IMediadorDao mediadorDao;
-	
-	private Logger logger = LoggerFactory.getLogger(usuarioService.class);
-	
-	
+		
 	@Override
 	@Transactional(readOnly = true)
 	public List<Mediador> findAll() {
-		
+		logger.info("inicio metodo findAll ");
 		
 		return (List<Mediador>) mediadorDao.findAll();
 	}
@@ -38,28 +37,28 @@ public class MediadorServiceImpl implements IMediadorService{
 	@Override
 	@Transactional(readOnly = true)
 	public Page<Mediador> findAll(Pageable pageable) {
+		logger.info("inicio metodo findAll ");
 		return mediadorDao.findAll(pageable);
 	}
-	
 	
 	@Override
 	@Transactional(readOnly = true)	
 	public Mediador findById(Long id) {
-		// TODO Auto-generated method stub
+		logger.info("inicio metodo findById ");
 		return mediadorDao.findById(id).orElse(null);
 	}
 
 	@Override	
 	@Transactional
 	public Mediador save(Mediador mediador) {
-		// TODO Auto-generated method stub
+		logger.info("inicio metodo save ");
 		return mediadorDao.save(mediador);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		logger.info("inicio metodo delete ");
 		mediadorDao.deleteById(id);
 	}
 

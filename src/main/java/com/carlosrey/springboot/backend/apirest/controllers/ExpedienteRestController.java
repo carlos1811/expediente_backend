@@ -69,7 +69,7 @@ public class ExpedienteRestController {
 	private static final Logger logger = LoggerFactory.getLogger(ExpedienteRestController.class);
 
 	@GetMapping("/expediente")
-	public  List<Expediente> index() 
+	public  List<Expediente> findAll() 
 	
 	{
 		logger.info("inicio metodo index ");
@@ -78,7 +78,7 @@ public class ExpedienteRestController {
 	}
 	
 	@GetMapping("/expediente/page/{page}")
-	public  Page<Expediente> index(@PathVariable Integer page) 
+	public  Page<Expediente> findPage(@PathVariable Integer page) 
 	
 	{
 		logger.info("inicio metodo index Paginacion ");
@@ -89,7 +89,7 @@ public class ExpedienteRestController {
 	
 	
 	@GetMapping("expediente/{id}")
-	public ResponseEntity<?> show(@PathVariable Long id)
+	public ResponseEntity<?> findByExpediente(@PathVariable Long id)
 	{
 		logger.info("inicio metodo show ");
 		
@@ -224,13 +224,21 @@ public class ExpedienteRestController {
 		expedienteService.delete(id);
 		
 		} catch (DataAccessException e) {
-		
-			response.put("mensaje", "El expediente ID: ".concat(id.toString().concat("no existe en la base de datos!")));
+			
+			String mensaje =  messageSource.getMessage("controller.mensaje11", null,LocaleContextHolder.getLocale()) 
+					+ id.toString()
+					+ messageSource.getMessage("controller.mensaje5", null,LocaleContextHolder.getLocale()) ;
+
+			response.put("mensaje", mensaje);
 			response.put("errors",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
 		}
 		
-		response.put("mensaje", "El expediente ID: ".concat(id.toString().concat("ha sido eliminado con exito")));
+		String mensaje =  messageSource.getMessage("controller.mensaje11", null,LocaleContextHolder.getLocale()) 
+				+ id.toString()
+				+ messageSource.getMessage("controller.mensaje7", null,LocaleContextHolder.getLocale()) ;
+		
+		response.put("mensaje", mensaje);
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 	}
 	
