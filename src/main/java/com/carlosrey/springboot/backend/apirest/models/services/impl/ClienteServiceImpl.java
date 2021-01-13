@@ -1,4 +1,4 @@
-package com.carlosrey.springboot.backend.apirest.models.services;
+package com.carlosrey.springboot.backend.apirest.models.services.impl;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import com.carlosrey.springboot.backend.apirest.controllers.ClienteRestControlle
 import com.carlosrey.springboot.backend.apirest.models.dao.IClienteDao;
 import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
 import com.carlosrey.springboot.backend.apirest.models.entity.Provincia;
+import com.carlosrey.springboot.backend.apirest.models.services.IClienteService;
 /**
  * @author Carlos Rey Silva 
  * https://github.com/carlos1811
@@ -65,13 +66,13 @@ public class ClienteServiceImpl implements IClienteService{
 		clienteDao.deleteById(id);
 	}
 
-	@Override
+
+/*	@Override
 	public List<Provincia> findAllProvincias() {
 		logger.info("inicio metodo findAllProvincias ");
 		return clienteDao.findAllProvincias();
 		
 	}
-
-	
+*/
 
 }

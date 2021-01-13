@@ -1,4 +1,4 @@
-package com.carlosrey.springboot.backend.apirest.models.services;
+package com.carlosrey.springboot.backend.apirest.models.services.impl;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.carlosrey.springboot.backend.apirest.models.dao.ISociedadDao;
 import com.carlosrey.springboot.backend.apirest.models.entity.Sociedad;
+import com.carlosrey.springboot.backend.apirest.models.services.ISociedadService;
 /**
  * @author Carlos Rey Silva 
  * https://github.com/carlos1811

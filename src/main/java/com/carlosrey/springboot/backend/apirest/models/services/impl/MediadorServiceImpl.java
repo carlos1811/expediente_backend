@@ -1,4 +1,4 @@
-package com.carlosrey.springboot.backend.apirest.models.services;
+package com.carlosrey.springboot.backend.apirest.models.services.impl;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.carlosrey.springboot.backend.apirest.models.dao.IMediadorDao;
 import com.carlosrey.springboot.backend.apirest.models.entity.Mediador;
+import com.carlosrey.springboot.backend.apirest.models.services.IMediadorService;
 
 /**
  * @author Carlos Rey Silva 

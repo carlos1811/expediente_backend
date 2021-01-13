@@ -25,7 +25,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 
+import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
 import com.carlosrey.springboot.backend.apirest.models.entity.Expediente;
+import com.carlosrey.springboot.backend.apirest.models.entity.Mediador;
 import com.carlosrey.springboot.backend.apirest.models.services.IExpedienteService;
 
 /**
@@ -37,10 +39,13 @@ class ExpedienteRestControllerTest {
 	
 	private static final Long EXPEDIENTE_ID = 1L;
 	private static final String NUMPOLIZA = "012391";
-	private static final String ASEGURADOR = "rs";
-	private static final String TOMADORSEGURO = "Carlos RD";
+	private static final Mediador ASEGURADOR = new Mediador();
+	private static final Cliente TOMADORSEGURO = new Cliente();
+	private static final String AESEGURADORPROPIETARIO = "Propio";
 	private static final Date FECHAINIPOLIZA = new Date(2020 - 02 - 01);
 	private static final Date FECHAFINPOLIZA = new Date(2020 - 02 - 01);
+	
+	
 	private static final String REVISION = "Carlos RD";
 	private static final String TIPODEVIVIENDA = "Carlos RD";
 	private static final String TIPODEREVISION = "anual";
@@ -59,6 +64,9 @@ class ExpedienteRestControllerTest {
 	public static final Expediente EXPEDIENTE = new Expediente();
 	public static Expediente EXPEDIENTE_RESPONSE = new Expediente();
 	public static List<Expediente> EXPEDIENTE_RESPONSE_LIST = new ArrayList<Expediente>();
+	
+	
+	
 
 	@Mock
 	IExpedienteService iExpedienteService;
@@ -76,16 +84,11 @@ class ExpedienteRestControllerTest {
 		MockitoAnnotations.initMocks(this);
 
 		EXPEDIENTE.setIdExpediente(EXPEDIENTE_ID);
+		EXPEDIENTE.setNumPoliza(NUMPOLIZA);
+		EXPEDIENTE.setAsegurador(ASEGURADOR);
+		EXPEDIENTE.setTomadorSeguro(TOMADORSEGURO);
+		EXPEDIENTE.setAseguPropietario(AESEGURADORPROPIETARIO);
 		
-		/* POner todos lso campos	
-		
-		EXPEDIENTE.setNombre(NAME);
-		EXPEDIENTE.setEmail(EMAIL);
-		EXPEDIENTE.setApellido(APELLIDO);
-		EXPEDIENTE.setActivo(ACTIVO);
-		EXPEDIENTE.setCreateAt(CREATE_AT);
-*/
-
 
 		LocaleContextHolder.setLocale(Locale.US);
 

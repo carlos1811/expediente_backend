@@ -23,6 +23,6 @@ public interface IClienteService {
 
 	public Page<Cliente> findAll(Pageable pageable);
 	
-	public List<Provincia> findAllProvincias();
+//	public List<Provincia> findAllProvincias();
 
 }
