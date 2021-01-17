@@ -14,6 +14,4 @@ public interface ISociedadService {
 	
 	public void delete(Long id);
 
-
-
 }

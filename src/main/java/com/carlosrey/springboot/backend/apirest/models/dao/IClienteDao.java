@@ -10,8 +10,8 @@ import com.carlosrey.springboot.backend.apirest.models.entity.Provincia;
 
 public interface IClienteDao extends	JpaRepository<Cliente, Long>{
 
-//	@Query("from Provincia")
-//	public List<Provincia> findAllProvincias();
+
+	
 	
 	
 }

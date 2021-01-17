@@ -30,8 +30,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.carlosrey.springboot.backend.apirest.configuration.Config;
+import com.carlosrey.springboot.backend.apirest.json.EmailCliente;
 import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
 import com.carlosrey.springboot.backend.apirest.models.services.IClienteService;
+import com.carlosrey.springboot.backend.apirest.models.services.IEmailService;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -45,7 +47,6 @@ import net.sf.jasperreports.engine.JasperReport;
  * https://github.com/carlos1811
  */
 
-
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
@@ -56,6 +57,9 @@ public class ClienteRestController {
 
 	@Autowired
 	private Config config;
+	
+	@Autowired
+	private IEmailService iEmailService;
 
 	@Autowired
 	private MessageSource messageSource;
@@ -250,7 +254,53 @@ public class ClienteRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 
 	}
+	
+	@PostMapping("email")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<?> sendEmail(@RequestBody EmailCliente emailCliente) {
 
+		logger.info("inicio metodo create ");
+		
+		Map<String, Object> response = new HashMap<>();
+
+		try {
+			
+			Cliente cliente = clienteService.findById(emailCliente.getIdCliente().getIdCliente());
+			
+			if (cliente.getEmail() != null) {
+				
+				String nombreCompleto = cliente.getNombre() + ' ' + cliente.getApellido();
+			
+			iEmailService.processSendEmail(cliente.getEmail(), emailCliente.getTemplate(), emailCliente.getTemplateType(), nombreCompleto);
+			
+			}
+			else {
+				
+				String mensaje = "no esta informado el email para este cliente: "
+						+ cliente.getIdCliente().toString();
+				response.put("mensaje", mensaje);
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+			}
+			
+		} catch (Exception e) {
+			
+			String mensaje = "Se ha producido un error en el envio de email";
+			
+			response.put("mensaje", mensaje);
+			response.put("errors", e.getMessage().concat(": ").concat(e.getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
+		String mensaje = "Email enviado correctamente";
+
+		response.put("mensaje", mensaje);
+
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
+
+	
+	
+	
 	/*@GetMapping("/clientes/provincia")
 	public List<Provincia> provincias()
 

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "notificacion")
-public class Notification implements Serializable {
+public class Notificacion implements Serializable {
 
 	/**
 	 * 
@@ -22,7 +22,7 @@ public class Notification implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
+	@Column(columnDefinition = "TEXT")
 	private String template;
 
 	@Column

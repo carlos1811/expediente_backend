@@ -10,10 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.carlosrey.springboot.backend.apirest.controllers.ClienteRestController;
 import com.carlosrey.springboot.backend.apirest.models.dao.IClienteDao;
 import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
-import com.carlosrey.springboot.backend.apirest.models.entity.Provincia;
 import com.carlosrey.springboot.backend.apirest.models.services.IClienteService;
 /**
  * @author Carlos Rey Silva 
@@ -67,12 +65,5 @@ public class ClienteServiceImpl implements IClienteService{
 	}
 
 
-/*	@Override
-	public List<Provincia> findAllProvincias() {
-		logger.info("inicio metodo findAllProvincias ");
-		return clienteDao.findAllProvincias();
-		
-	}
-*/
 
 }

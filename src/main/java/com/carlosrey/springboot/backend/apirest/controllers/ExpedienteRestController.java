@@ -1,8 +1,6 @@
 package com.carlosrey.springboot.backend.apirest.controllers;
 
 
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.core.env.Environment;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,14 +33,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.carlosrey.springboot.backend.apirest.configuration.Config;
 import com.carlosrey.springboot.backend.apirest.models.entity.Expediente;
 import com.carlosrey.springboot.backend.apirest.models.services.IExpedienteService;
-
-import javassist.bytecode.stackmap.TypeData.ClassName;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
 
 /**
  * @author Carlos Rey Silva 

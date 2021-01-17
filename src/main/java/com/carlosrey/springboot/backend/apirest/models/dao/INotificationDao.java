@@ -1,16 +1,27 @@
 package com.carlosrey.springboot.backend.apirest.models.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
+import com.carlosrey.springboot.backend.apirest.models.entity.Notificacion;
 
-import com.carlosrey.springboot.backend.apirest.models.entity.Notification;
+public interface INotificationDao extends JpaRepository<Notificacion, Long>{
 
-public interface INotificationDao extends JpaRepository<Notification, Long>{
-
-//	@Query("from Provincia")
-//	public List<Provincia> findAllProvincias();
 	
-	public Notification findByTemplate(String templateCode);
+	public Notificacion findByTemplate(String templateType);
+	
+	
+    @Query("from Notificacion n where n.templateType = ?1")
+	public Notificacion findByTemplateType(String TemplateType);
+	
+	
+	@Query("from Notificacion ORDER BY id")
+	public List<Notificacion> findAll();
+	
+	
+	
 	
 	
 }

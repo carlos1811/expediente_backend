@@ -1,8 +1,6 @@
 package com.carlosrey.springboot.backend.apirest.controllers;
 
 
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -16,8 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -32,17 +28,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.carlosrey.springboot.backend.apirest.configuration.Config;
 import com.carlosrey.springboot.backend.apirest.models.entity.Mediador;
 import com.carlosrey.springboot.backend.apirest.models.services.IMediadorService;
-
-import javassist.bytecode.stackmap.TypeData.ClassName;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
 
 /**
  * @author Carlos Rey Silva 
@@ -60,10 +47,7 @@ public class MediadorRestController {
 
 	@Autowired
 	private MessageSource messageSource;
-    
-    @Autowired
-    private Config config;
-	
+
     private static final Logger logger = LoggerFactory.getLogger(MediadorRestController.class);
 
 	@GetMapping("/mediador")

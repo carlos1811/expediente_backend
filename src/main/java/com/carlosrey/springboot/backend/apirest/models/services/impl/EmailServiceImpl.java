@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.carlosrey.springboot.backend.apirest.models.dao.INotificationDao;
 import com.carlosrey.springboot.backend.apirest.models.entity.EmailTemplate;
-import com.carlosrey.springboot.backend.apirest.models.entity.Notification;
+import com.carlosrey.springboot.backend.apirest.models.entity.Notificacion;
 import com.carlosrey.springboot.backend.apirest.models.services.IEmailService;
 
 /**
@@ -63,10 +63,15 @@ public class EmailServiceImpl implements IEmailService{
 		
 	}
 	
-	private EmailTemplate findTemplateAndReplace ( final String templateCode, final String currentName) throws Exception
+	private EmailTemplate findTemplateAndReplace ( final String TemplateType, final String currentName) throws Exception
 	{
 		
-		final Notification notificacion = iNotificationDao.findByTemplate(templateCode);
+		
+		
+		final Notificacion notificacion = iNotificationDao.findByTemplateType(TemplateType);
+		
+		
+		
 		final EmailTemplate emailTemplate = new EmailTemplate();
 		emailTemplate.setSubject(notificacion.getTemplateType());
 		emailTemplate.setTemplate(notificacion.getTemplate()
@@ -74,9 +79,5 @@ public class EmailServiceImpl implements IEmailService{
 		
 		return emailTemplate;
 	}
-	
-	
-	
-	
 
 }

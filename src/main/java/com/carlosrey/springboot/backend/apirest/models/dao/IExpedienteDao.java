@@ -6,4 +6,7 @@ import com.carlosrey.springboot.backend.apirest.models.entity.Expediente;
 
 public interface IExpedienteDao extends JpaRepository<Expediente, Long>{
 
+	
+	
+	
 }
