@@ -27,8 +27,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 
 import com.carlosrey.springboot.backend.apirest.configuration.Config;
+import com.carlosrey.springboot.backend.apirest.json.EmailCliente;
 import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
+import com.carlosrey.springboot.backend.apirest.models.entity.Notificacion;
 import com.carlosrey.springboot.backend.apirest.models.services.IClienteService;
+import com.carlosrey.springboot.backend.apirest.models.services.IEmailService;
 
 /**
  * @author Carlos Rey Silva https://github.com/carlos1811
@@ -42,17 +45,32 @@ class ClienteRestControllerTest {
 	private static final Boolean ACTIVO = true;
 	private static final Date CREATE_AT = new Date(2020 - 02 - 01);
 	private static final String EMAIL = "carlos@gmail.com";
+	
+	
+	private static final Long TEMPLATE_ID = 1L;
+	private static final String TEMPLATE = "<html></html>";
+	private static final String TEMPLATETYPE = "PAYMENT";
+	
 
 	public static final Cliente CLIENTE = new Cliente();
+	public static final EmailCliente EMAILCLIENTE = new EmailCliente();
+	
+	public static final Notificacion TEMPLATEID = new Notificacion();
 	public static Cliente CLIENTE_RESPONSE = new Cliente();
 	public static List<Cliente> CLIENTE_RESPONSE_LIST = new ArrayList<Cliente>();
+	public static List<Notificacion> TEMPLATES_RESPONSE_LIST = new ArrayList<Notificacion>();
+
+	
 
 	@Mock
 	IClienteService iClienteService;
 
 	@Mock
 	private MessageSource messageSource;
-
+	
+	@Mock
+	private IEmailService iEmailService;
+	
 	@InjectMocks
 	ClienteRestController clienteRestController;
 	
@@ -74,6 +92,15 @@ class ClienteRestControllerTest {
 		CLIENTE.setApellido(APELLIDO);
 		CLIENTE.setActivo(ACTIVO);
 		CLIENTE.setCreateAt(CREATE_AT);
+		
+		EMAILCLIENTE.setIdCliente(CLIENTE);
+		EMAILCLIENTE.setNombreCliente(NAME);
+		EMAILCLIENTE.setTemplateType(TEMPLATETYPE);
+		
+		
+		TEMPLATEID.setId(TEMPLATE_ID);
+		TEMPLATEID.setTemplate(TEMPLATE);
+		TEMPLATEID.setTemplateType(TEMPLATETYPE);
 
 		LocaleContextHolder.setLocale(Locale.US);
 
@@ -122,6 +149,71 @@ class ClienteRestControllerTest {
 		assertEquals(response, CLIENTE_RESPONSE_LIST);
 
 	}
+	
+	
+	@Test
+	@DisplayName("Test get all templates")
+	public void getTemplatesTest() {
+
+		Mockito.when(iClienteService.findAllTemplates()).thenReturn(TEMPLATES_RESPONSE_LIST);
+		final List<Notificacion> response = clienteRestController.templatesAll();
+
+		assertEquals(response, TEMPLATES_RESPONSE_LIST);
+
+	}
+	
+	@Test
+	@DisplayName("send Email Test")
+	public void sendEmailTest() throws Exception{
+		
+		Mockito.when(iClienteService.findById(CLIENTE.getIdCliente())).thenReturn(CLIENTE);
+		
+		doNothing().when(iEmailService).processSendEmail(CLIENTE.getEmail(), "FACTURA", CLIENTE.getNombre());
+		
+		final ResponseEntity<?> response = clienteRestController.sendEmail(EMAILCLIENTE);
+		 
+		assertEquals(response.getStatusCode(), HttpStatus.OK);
+		
+	}
+	
+	
+	@Test
+	@DisplayName("send Email Error")
+	public void sendEmailError() throws Exception{
+		
+		//Mockito.when(iClienteService.findById(CLIENTE.getIdCliente())).thenReturn(CLIENTE);
+		
+		Mockito.when(iClienteService.findById(CLIENTE_ID)).thenThrow(new DataAccessException("Error Junit") {
+		});
+
+	//	Mockito.doThrow(new Exception("es un error") {}).when(iEmailService).processSendEmail(CLIENTE.getEmail(), "FACTURA", CLIENTE.getNombre());
+		
+		final ResponseEntity<?> response = clienteRestController.sendEmail(EMAILCLIENTE);
+		 
+		assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
+		
+	}
+	
+	
+	@Test
+	@DisplayName("send Email Null")
+	public void sendEmailErrorMailNull() throws Exception{
+		
+		CLIENTE.setEmail(null);
+		
+		Mockito.when(iClienteService.findById(CLIENTE.getIdCliente())).thenReturn(CLIENTE);
+
+		 doThrow(new Exception("...") {}).when(iEmailService).processSendEmail(CLIENTE.getEmail(), "FACTURA", CLIENTE.getNombre());
+		
+		final ResponseEntity<?> response = clienteRestController.sendEmail(EMAILCLIENTE);
+		 
+		assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
+		
+	}
+	
+	
+	
+	
 
 	@Test
 	@DisplayName("Test create customer")
@@ -140,6 +232,9 @@ class ClienteRestControllerTest {
 
 	}
 
+		
+	
+	
 	@Test
 	@DisplayName("Test create customer validate error")
 	public void createTestHasError() {

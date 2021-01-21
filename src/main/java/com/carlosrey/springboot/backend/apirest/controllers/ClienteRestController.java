@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.carlosrey.springboot.backend.apirest.configuration.Config;
 import com.carlosrey.springboot.backend.apirest.json.EmailCliente;
 import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
+import com.carlosrey.springboot.backend.apirest.models.entity.Notificacion;
 import com.carlosrey.springboot.backend.apirest.models.services.IClienteService;
 import com.carlosrey.springboot.backend.apirest.models.services.IEmailService;
 
@@ -66,6 +67,15 @@ public class ClienteRestController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ClienteRestController.class);
 
+	@GetMapping("/clientes/combo")
+	public List<Cliente> getClientesCombo()
+
+	{
+		logger.info("inicio metodo getClientes ");
+		List<Cliente> cliente = clienteService.findAllCombo();
+		return cliente;
+	}
+	
 	@GetMapping("/clientes")
 	public List<Cliente> getClientes()
 
@@ -74,6 +84,7 @@ public class ClienteRestController {
 		List<Cliente> cliente = clienteService.findAll();
 		return cliente;
 	}
+	
 
 	@GetMapping("clientes/{id}")
 	public ResponseEntity<?> getClientesId(@PathVariable Long id) {
@@ -259,7 +270,7 @@ public class ClienteRestController {
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<?> sendEmail(@RequestBody EmailCliente emailCliente) {
 
-		logger.info("inicio metodo create ");
+		logger.info("inicio metodo sendEmail ");
 		
 		Map<String, Object> response = new HashMap<>();
 
@@ -271,8 +282,8 @@ public class ClienteRestController {
 				
 				String nombreCompleto = cliente.getNombre() + ' ' + cliente.getApellido();
 			
-			iEmailService.processSendEmail(cliente.getEmail(), emailCliente.getTemplate(), emailCliente.getTemplateType(), nombreCompleto);
-			
+			iEmailService.processSendEmail(cliente.getEmail(), emailCliente.getTemplateType(), nombreCompleto);
+			 
 			}
 			else {
 				
@@ -301,13 +312,16 @@ public class ClienteRestController {
 	
 	
 	
-	/*@GetMapping("/clientes/provincia")
-	public List<Provincia> provincias()
+	@GetMapping("/clientes/templates")
+	public List<Notificacion> templatesAll()
 
 	{
-		logger.info("inicio metodo index ");
-		List<Provincia> provincias = clienteService.findAllProvincias();
-		return provincias;
-	}*/
+		logger.info("inicio metodo templatesAll ");
+		List<Notificacion> notificaciones = clienteService.findAllTemplates();
+		
+		System.out.print(notificaciones);
+		
+		return notificaciones;
+	}
 
 }

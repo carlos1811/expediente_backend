@@ -30,15 +30,13 @@ public class EmailServiceImpl implements IEmailService{
 	@Autowired
 	private INotificationDao iNotificationDao;
 	
-	@Override
-	public String processSendEmail(String receiver, String subject, String templateCode, String currentName)
+	public void processSendEmail(String receiver, String templateCode, String currentName)
 			throws Exception {
 		
 		final EmailTemplate emailTemplate = findTemplateAndReplace(templateCode, currentName);
 		
 		this.sendEmail(receiver, emailTemplate.getSubject(), emailTemplate.getTemplate());
-		
-		return null;
+
 	}
 	
 	private void sendEmail(final String receiver, final String subject, final String template) throws Exception{

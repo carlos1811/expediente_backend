@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.carlosrey.springboot.backend.apirest.models.dao.IClienteDao;
+import com.carlosrey.springboot.backend.apirest.models.dao.INotificationDao;
 import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
+import com.carlosrey.springboot.backend.apirest.models.entity.Notificacion;
 import com.carlosrey.springboot.backend.apirest.models.services.IClienteService;
 /**
  * @author Carlos Rey Silva 
@@ -22,6 +24,9 @@ public class ClienteServiceImpl implements IClienteService{
 
 	@Autowired
 	private IClienteDao clienteDao;
+	
+	@Autowired
+	private INotificationDao notificationDao;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ClienteServiceImpl.class);
 	
@@ -34,6 +39,15 @@ public class ClienteServiceImpl implements IClienteService{
 		return (List<Cliente>) clienteDao.findAll();
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Cliente> findAllCombo() {
+		logger.info("inicio metodo findAllCombo ");
+		
+		return (List<Cliente>) clienteDao.findByActiveTrue();
+	}
+	
+	
 	@Override
 	@Transactional(readOnly = true)
 	public Page<Cliente> findAll(Pageable pageable) {
@@ -62,6 +76,14 @@ public class ClienteServiceImpl implements IClienteService{
 	public void delete(Long id) {
 		logger.info("inicio metodo delete ");
 		clienteDao.deleteById(id);
+	}
+
+	@Override
+	@Transactional
+	public List<Notificacion> findAllTemplates() {
+		logger.info("inicio metodo delete ");
+		
+		return (List<Notificacion>) notificationDao.findAll();
 	}
 
 

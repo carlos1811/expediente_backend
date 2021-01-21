@@ -34,8 +34,6 @@ public class Expediente implements Serializable {
 	
 	@Size(min=1 , max = 30)
 	private String numPoliza;
-			
-		
 	
 	//Mediador
     @ManyToOne(fetch=FetchType.LAZY)
@@ -43,15 +41,13 @@ public class Expediente implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 	private Mediador asegurador;
 	
-	
 	//Cliente
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="id_cliente")
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 	private Cliente tomadorSeguro;
-	
 
-	
+    
 	//Cliente
 	private String aseguPropietario;
 		
@@ -81,9 +77,6 @@ public class Expediente implements Serializable {
 	private Integer rcEdificacion;
 	
 	private Boolean activo;
-
-	
-	
 	
 	
 	public Long getIdExpediente() {

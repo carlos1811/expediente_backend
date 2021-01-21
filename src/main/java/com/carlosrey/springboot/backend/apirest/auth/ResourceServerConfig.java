@@ -23,7 +23,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-		.antMatchers(HttpMethod.GET,"/api/clientes","/api/mediador","/v2/api-docs",
+		.antMatchers(HttpMethod.GET,"/api/clientes","/api/mediador","/api/clientes/combo","/v2/api-docs",
                 "/configuration/ui",
                 "/swagger-resources/**",
                 "/configuration/security",

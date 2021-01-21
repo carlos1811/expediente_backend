@@ -6,12 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
-import com.carlosrey.springboot.backend.apirest.models.entity.Provincia;
 
 public interface IClienteDao extends	JpaRepository<Cliente, Long>{
 
 
-	
+	@Query("from Cliente c where c.activo = true ORDER BY id")
+	public List<Cliente> findByActiveTrue();
 	
 	
 }

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
+import com.carlosrey.springboot.backend.apirest.models.entity.Notificacion;
 /**
  * @author Carlos Rey Silva 
  * https://github.com/carlos1811
@@ -13,6 +14,8 @@ import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
 public interface IClienteService {
 	
 	public List<Cliente> findAll();
+	
+	public List<Cliente> findAllCombo();
 	
 	public Cliente findById(Long id);
 	
@@ -22,5 +25,7 @@ public interface IClienteService {
 
 	public Page<Cliente> findAll(Pageable pageable);
 	
+	public List<Notificacion> findAllTemplates();
 
+	
 }
