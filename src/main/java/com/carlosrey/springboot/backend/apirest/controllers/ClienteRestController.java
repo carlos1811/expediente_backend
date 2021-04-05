@@ -30,12 +30,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.carlosrey.springboot.backend.apirest.configuration.Config;
-import com.carlosrey.springboot.backend.apirest.jms.Publisher;
-import com.carlosrey.springboot.backend.apirest.json.EmailCliente;
+//import com.carlosrey.springboot.backend.apirest.jms.Publisher;
+//import com.carlosrey.springboot.backend.apirest.json.EmailCliente;
 import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
 import com.carlosrey.springboot.backend.apirest.models.entity.Notificacion;
 import com.carlosrey.springboot.backend.apirest.models.services.IClienteService;
-import com.carlosrey.springboot.backend.apirest.models.services.IEmailService;
+//import com.carlosrey.springboot.backend.apirest.models.services.IEmailService;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -57,8 +57,8 @@ public class ClienteRestController {
 	@Autowired
 	private IClienteService clienteService;
 	
-	@Autowired
-	private Publisher publisher;
+//	@Autowired
+//	private Publisher publisher;
 
 	@Autowired
 	private Config config;
@@ -270,48 +270,48 @@ public class ClienteRestController {
 
 	}
 	
-	@PostMapping("email")
-	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<?> sendEmail(@RequestBody EmailCliente emailCliente) {
-
-		logger.info("inicio metodo sendEmail ");
-		
-		Map<String, Object> response = new HashMap<>();
-
-		try {
-			
-			Cliente cliente = clienteService.findById(emailCliente.getIdCliente().getIdCliente());
-			
-			if (cliente.getEmail() != null) {
-				
-				String nombreCompleto = cliente.getNombre() + ' ' + cliente.getApellido();
-			
-//			iEmailService.processSendEmail(cliente.getEmail(), emailCliente.getTemplateType(), nombreCompleto);
-			 
-			}
-			else {
-				
-				String mensaje = "no esta informado el email para este cliente: "
-						+ cliente.getIdCliente().toString();
-				response.put("mensaje", mensaje);
-				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-			}
-			
-		} catch (Exception e) {
-			
-			String mensaje = "Se ha producido un error en el envio de email";
-			
-			response.put("mensaje", mensaje);
-			response.put("errors", e.getMessage().concat(": ").concat(e.getMessage()));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-		}
-		
-		String mensaje = "Email enviado correctamente";
-
-		response.put("mensaje", mensaje);
-
-		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
-	}
+//	@PostMapping("email")
+//	@ResponseStatus(HttpStatus.OK)
+//	public ResponseEntity<?> sendEmail(@RequestBody EmailCliente emailCliente) {
+//
+//		logger.info("inicio metodo sendEmail ");
+//		
+//		Map<String, Object> response = new HashMap<>();
+//
+//		try {
+//			
+//			Cliente cliente = clienteService.findById(emailCliente.getIdCliente().getIdCliente());
+//			
+//			if (cliente.getEmail() != null) {
+//				
+//				String nombreCompleto = cliente.getNombre() + ' ' + cliente.getApellido();
+//			
+////			iEmailService.processSendEmail(cliente.getEmail(), emailCliente.getTemplateType(), nombreCompleto);
+//			 
+//			}
+//			else {
+//				
+//				String mensaje = "no esta informado el email para este cliente: "
+//						+ cliente.getIdCliente().toString();
+//				response.put("mensaje", mensaje);
+//				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+//			}
+//			
+//		} catch (Exception e) {
+//			
+//			String mensaje = "Se ha producido un error en el envio de email";
+//			
+//			response.put("mensaje", mensaje);
+//			response.put("errors", e.getMessage().concat(": ").concat(e.getMessage()));
+//			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+//		}
+//		
+//		String mensaje = "Email enviado correctamente";
+//
+//		response.put("mensaje", mensaje);
+//
+//		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+//	}
 
 	
 	
@@ -329,7 +329,7 @@ public class ClienteRestController {
 	}
 	
 	
-	@PostMapping("/rabbit")
+/*	@PostMapping("/rabbit")
 	public void rabbit()
 
 	{
@@ -342,7 +342,7 @@ public class ClienteRestController {
 		
 
 	}
-	
+*/	
 	
 
 }
