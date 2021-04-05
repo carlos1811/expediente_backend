@@ -33,7 +33,7 @@ import com.carlosrey.springboot.backend.apirest.models.services.IExpedienteServi
 /**
  * @author Carlos Rey Silva https://github.com/carlos1811
  */
-
+/*
 class ExpedienteRestControllerTest {
 
 	
@@ -106,13 +106,6 @@ class ExpedienteRestControllerTest {
 		assertEquals(response.getStatusCode(), HttpStatus.OK);
 		
 		
-		/*
-		assertEquals(EXPEDIENTE_RESPONSE.getNombre(), NAME);
-		assertEquals(EXPEDIENTE_RESPONSE.getEmail(), EMAIL);
-		assertEquals(EXPEDIENTE_RESPONSE.getApellido(), APELLIDO);
-		assertEquals(EXPEDIENTE_RESPONSE.getActivo(), true);
-		assertEquals(EXPEDIENTE_RESPONSE.getCreateAt(), CREATE_AT);
-	*/
 
 
 	}
@@ -176,9 +169,6 @@ class ExpedienteRestControllerTest {
 
 	}
 
-	/**
-	 * @author Carlos Rey Silva https://github.com/carlos1811
-	 */
 
 	@Test
 	@DisplayName("Test create provider test error")
@@ -261,3 +251,4 @@ class ExpedienteRestControllerTest {
 	}
 	
 }
+*/

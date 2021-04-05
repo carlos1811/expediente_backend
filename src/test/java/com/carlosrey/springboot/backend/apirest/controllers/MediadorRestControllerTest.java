@@ -33,7 +33,7 @@ import com.carlosrey.springboot.backend.apirest.models.services.IMediadorService
  */
 
 class MediadorRestControllerTest {
-
+	/*
 	private static final Long MEDIADOR_ID = 1L;
 	private static final String NAME = "carlos";
 	private static final String APELLIDO = "rs";
@@ -149,9 +149,6 @@ class MediadorRestControllerTest {
 
 	}
 
-	/**
-	 * @author Carlos Rey Silva https://github.com/carlos1811
-	 */
 
 	@Test
 	@DisplayName("Test create provider test error")
@@ -232,5 +229,6 @@ class MediadorRestControllerTest {
 		 assertEquals(response.getStatusCode(),HttpStatus.BAD_REQUEST);
 
 	}
-	
+*/
 }
+

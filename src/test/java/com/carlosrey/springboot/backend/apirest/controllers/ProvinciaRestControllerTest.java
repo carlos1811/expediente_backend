@@ -22,7 +22,7 @@ import com.carlosrey.springboot.backend.apirest.models.services.IProvinciaServic
 /**
  * @author Carlos Rey Silva https://github.com/carlos1811º
  */
-
+/*
 class ProvinciaRestControllerTest {
 
 	private static final Long PROVINCIA_ID = 1L;
@@ -68,5 +68,6 @@ class ProvinciaRestControllerTest {
 	}
 
 
-	
+
 }
+*/

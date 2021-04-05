@@ -36,7 +36,7 @@ import com.carlosrey.springboot.backend.apirest.models.services.IEmailService;
 /**
  * @author Carlos Rey Silva https://github.com/carlos1811
  */
-
+/*
 class ClienteRestControllerTest {
 
 	private static final Long CLIENTE_ID = 1L;
@@ -251,9 +251,6 @@ class ClienteRestControllerTest {
 
 	}
 
-	/**
-	 * @author Carlos Rey Silva https://github.com/carlos1811
-	 */
 
 	@Test
 	@DisplayName("Test create customer test error")
@@ -381,7 +378,8 @@ class ClienteRestControllerTest {
 		
 	}
 	
-	*/
+
 	
 
 }
+*/
