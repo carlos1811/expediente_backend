@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.carlosrey.springboot.backend.apirest.configuration.Config;
+import com.carlosrey.springboot.backend.apirest.jms.Publisher;
 import com.carlosrey.springboot.backend.apirest.json.EmailCliente;
 import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
 import com.carlosrey.springboot.backend.apirest.models.entity.Notificacion;
@@ -55,12 +56,15 @@ public class ClienteRestController {
 
 	@Autowired
 	private IClienteService clienteService;
+	
+	@Autowired
+	private Publisher publisher;
 
 	@Autowired
 	private Config config;
 	
-	@Autowired
-	private IEmailService iEmailService;
+	//@Autowired
+	//private IEmailService iEmailService;
 
 	@Autowired
 	private MessageSource messageSource;
@@ -282,7 +286,7 @@ public class ClienteRestController {
 				
 				String nombreCompleto = cliente.getNombre() + ' ' + cliente.getApellido();
 			
-			iEmailService.processSendEmail(cliente.getEmail(), emailCliente.getTemplateType(), nombreCompleto);
+//			iEmailService.processSendEmail(cliente.getEmail(), emailCliente.getTemplateType(), nombreCompleto);
 			 
 			}
 			else {
@@ -323,5 +327,22 @@ public class ClienteRestController {
 		
 		return notificaciones;
 	}
+	
+	
+	@PostMapping("/rabbit")
+	public void rabbit()
+
+	{
+		logger.info("inicio metodo templatesAll ");
+		
+		
+		String msg = "Esto es una prueba de colas de rabbit";
+		
+		publisher.produceMsg(msg);
+		
+
+	}
+	
+	
 
 }
