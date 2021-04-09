@@ -1,7 +1,5 @@
 package com.carlosrey.springboot.backend.apirest.auth;
 
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,32 +17,31 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import static org.springframework.security.jwt.codec.Codecs.utf8Encode;
 
-
 @Configuration
+
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthorizationServerConfig.class);
-	
+	private static final Logger logger = LoggerFactory.getLogger(AuthorizationServerConfig.class);
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	@Autowired
+
 	@Qualifier("authenticationManager")
 	private AuthenticationManager authenticationManager;
-	
 
 	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		// TODO Auto-generated method stub
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception { // TODO Auto-generated
+																								// method stub
 		endpoints.authenticationManager(authenticationManager)
-		//.tokenStore(tokenStore()) //<----Es opcional esto ya que ya se realiza
-		.accessTokenConverter(accessTokenConverter());
+				// .tokenStore(tokenStore()) //<----Es opcional esto ya que ya se realiza
+				.accessTokenConverter(accessTokenConverter());
 	}
 
 	@Bean
-	public JwtTokenStore tokenStore() {
-		// TODO Auto-generated method stub
+	public JwtTokenStore tokenStore() { // TODO Auto-generated method stub
 		return new JwtTokenStore(accessTokenConverter());
 	}
 
@@ -60,22 +57,22 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	}
 
 	@Override
-	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		// TODO Auto-generated method stub
-		security.tokenKeyAccess("permitAll()")
-		.checkTokenAccess("isAuthenticated()");
+	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception { // TODO Auto-generated
+																								// method stub
+		security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
 	}
-	
-	//registra los front de angular con  las credenciales
+
+	// registra los front de angular con las credenciales
+
 	@Override
-	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		// TODO Auto-generated method stub
-		clients.inMemory().withClient("angularapp")
-		.secret(passwordEncoder.encode("12345"))
-		.scopes("read","write","webclient")
-		.authorizedGrantTypes("password","client_credentials","refresh_token")
-		.accessTokenValiditySeconds(3600)
-		.refreshTokenValiditySeconds(3600);
+	public void configure(ClientDetailsServiceConfigurer clients) throws Exception { // TODO Auto-generated method stub
+
+		clients.inMemory().withClient("angularapp").secret(passwordEncoder.encode("12345"))
+				.scopes("read", "write", "webclient")
+				.authorizedGrantTypes("password", "client_credentials", "refresh_token")
+				.accessTokenValiditySeconds(3600).refreshTokenValiditySeconds(3600);
+
 	}
-	
+
 }
+ 
