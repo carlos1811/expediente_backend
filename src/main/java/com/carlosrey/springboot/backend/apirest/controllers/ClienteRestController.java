@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -37,6 +35,7 @@ import com.carlosrey.springboot.backend.apirest.models.entity.Notificacion;
 import com.carlosrey.springboot.backend.apirest.models.services.IClienteService;
 //import com.carlosrey.springboot.backend.apirest.models.services.IEmailService;
 
+import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -49,6 +48,7 @@ import net.sf.jasperreports.engine.JasperReport;
  * https://github.com/carlos1811
  */
 
+@Slf4j
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
@@ -69,13 +69,11 @@ public class ClienteRestController {
 	@Autowired
 	private MessageSource messageSource;
 
-	private static final Logger logger = LoggerFactory.getLogger(ClienteRestController.class);
-
 	@GetMapping("/clientes/combo")
 	public List<Cliente> getClientesCombo()
 
 	{
-		logger.info("inicio metodo getClientes ");
+		log.info("inicio metodo getClientes ");
 		List<Cliente> cliente = clienteService.findAllCombo();
 		return cliente;
 	}
@@ -84,7 +82,7 @@ public class ClienteRestController {
 	public List<Cliente> getClientes()
 
 	{
-		logger.info("inicio metodo getClientes ");
+		log.info("inicio metodo getClientes ");
 		List<Cliente> cliente = clienteService.findAll();
 		return cliente;
 	}
@@ -92,7 +90,7 @@ public class ClienteRestController {
 
 	@GetMapping("clientes/{id}")
 	public ResponseEntity<?> getClientesId(@PathVariable Long id) {
-		logger.info("inicio metodo getClientesId ");
+		log.info("inicio metodo getClientesId ");
 
 		Cliente cliente = null;
 		Map<String, Object> response = new HashMap<>();
@@ -118,7 +116,7 @@ public class ClienteRestController {
 	public Page<Cliente> index(@PathVariable Integer page)
 
 	{
-		logger.info("inicio metodo index Paginacion ");
+		log.info("inicio metodo index Paginacion ");
 		Page<Cliente> cliente = clienteService.findAll(PageRequest.of(page, 4));
 		return cliente;
 	}*/
@@ -127,7 +125,7 @@ public class ClienteRestController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result) {
 
-		logger.info("inicio metodo create ");
+		log.info("inicio metodo create ");
 
 		Cliente clienteNew = null;
 		Map<String, Object> response = new HashMap<>();
@@ -169,7 +167,7 @@ public class ClienteRestController {
 	@PutMapping("clientes/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> update(@RequestBody Cliente cliente, @PathVariable Long id) {
-		logger.info("inicio metodo update ");
+		log.info("inicio metodo update ");
 
 		Map<String, Object> response = new HashMap<>();
 
@@ -203,7 +201,7 @@ public class ClienteRestController {
 	@DeleteMapping("clientes/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-		logger.info("inicio metodo delete ");
+		log.info("inicio metodo delete ");
 
 		Map<String, Object> response = new HashMap<>();
 
@@ -235,7 +233,7 @@ public class ClienteRestController {
 	public ResponseEntity<?> report() throws JRException, ClassNotFoundException, SQLException
 
 	{
-		logger.info("inicio metodo report ");
+		log.info("inicio metodo report ");
 
 		Map<String, Object> response = new HashMap<>();
 
@@ -274,7 +272,7 @@ public class ClienteRestController {
 //	@ResponseStatus(HttpStatus.OK)
 //	public ResponseEntity<?> sendEmail(@RequestBody EmailCliente emailCliente) {
 //
-//		logger.info("inicio metodo sendEmail ");
+//		log.info("inicio metodo sendEmail ");
 //		
 //		Map<String, Object> response = new HashMap<>();
 //
@@ -312,15 +310,13 @@ public class ClienteRestController {
 //
 //		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 //	}
-
-	
 	
 	
 	@GetMapping("/clientes/templates")
 	public List<Notificacion> templatesAll()
 
 	{
-		logger.info("inicio metodo templatesAll ");
+		log.info("inicio metodo templatesAll ");
 		List<Notificacion> notificaciones = clienteService.findAllTemplates();
 		
 		System.out.print(notificaciones);
@@ -328,18 +324,16 @@ public class ClienteRestController {
 		return notificaciones;
 	}
 	
-	
 /*	@PostMapping("/rabbit")
 	public void rabbit()
 
 	{
-		logger.info("inicio metodo templatesAll ");
+		log.info("inicio metodo templatesAll ");
 		
 		
 		String msg = "Esto es una prueba de colas de rabbit";
 		
 		publisher.produceMsg(msg);
-		
 
 	}
 */	

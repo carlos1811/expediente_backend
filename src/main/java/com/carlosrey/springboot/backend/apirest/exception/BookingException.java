@@ -8,13 +8,11 @@ public class BookingException extends Exception{
 	
 	private final int responseCode;
 
-
 	public BookingException(String code, int responseCode, String message) {
 		super(message);
 		this.code = code;
 		this.responseCode = responseCode;
 	}
-	
 
 	public String getCode() {
 		return code;
@@ -23,6 +21,5 @@ public class BookingException extends Exception{
 	public int getResponseCode() {
 		return responseCode;
 	}
-
 
 }

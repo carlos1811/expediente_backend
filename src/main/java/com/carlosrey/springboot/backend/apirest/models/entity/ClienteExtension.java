@@ -11,9 +11,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 @Entity
 @Table(name="clientes_extension")
 public class ClienteExtension implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -26,17 +36,5 @@ public class ClienteExtension implements Serializable {
 	
 	private String textoArea;
 
-
-	public String getTextoArea() {
-		return textoArea;
-	}
-
-	public void setTextoArea(String textoArea) {
-		this.textoArea = textoArea;
-	}
-	
-   
-	
-	
 	
 }

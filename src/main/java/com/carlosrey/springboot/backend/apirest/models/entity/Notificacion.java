@@ -9,8 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Setter
+@Getter
 @Entity
-@Table(name = "notificacion")
+@Table(name = "notif	icacion")
 public class Notificacion implements Serializable {
 
 	/**
@@ -28,28 +34,5 @@ public class Notificacion implements Serializable {
 	@Column
 	private String templateType;
 
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public String getTemplate() {
-		return template;
-	}
-
-	public void setTemplate(String template) {
-		this.template = template;
-	}
-
-	public String getTemplateType() {
-		return templateType;
-	}
-
-	public void setTemplateType(String templateType) {
-		this.templateType = templateType;
-	}
-	
 }

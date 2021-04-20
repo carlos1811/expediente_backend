@@ -10,11 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author Carlos Rey Silva 
  * https://github.com/carlos1811
  */
 
+@Setter
+@Getter
 @Entity
 @Table(name="provincia")
 public class Provincia implements Serializable {
@@ -32,25 +37,6 @@ public class Provincia implements Serializable {
 	@Column(nullable = false)
 	@Size(min=1 , max = 40)
 	private String provincia;
-
-	public Long getIdProvincia() {
-		return idProvincia;
-	}
-
-	public void setIdProvincia(Long idProvincia) {
-		this.idProvincia = idProvincia;
-	}
-
-	public String getNombre() {
-		return provincia;
-	}
-
-	public void setNombre(String provincia) {
-		this.provincia = provincia;
-	}
-
-	
-	
 	
 	
 }

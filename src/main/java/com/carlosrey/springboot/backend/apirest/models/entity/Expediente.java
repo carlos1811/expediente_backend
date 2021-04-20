@@ -16,11 +16,16 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author Carlos Rey Silva 
  * https://github.com/carlos1811
  */
 
+@Setter
+@Getter
 @Entity
 @Table(name="expediente")
 public class Expediente implements Serializable {
@@ -77,156 +82,5 @@ public class Expediente implements Serializable {
 	private Integer rcEdificacion;
 	
 	private Boolean activo;
-	
-	
-	public Long getIdExpediente() {
-		return idExpediente;
-	}
-
-	public void setIdExpediente(Long idExpediente) {
-		this.idExpediente = idExpediente;
-	}
-
-	public String getNumPoliza() {
-		return numPoliza;
-	}
-
-	public void setNumPoliza(String numPoliza) {
-		this.numPoliza = numPoliza;
-	}
-
-	public String getAseguPropietario() {
-		return aseguPropietario;
-	}
-
-	public void setAseguPropietario(String aseguPropietario) {
-		this.aseguPropietario = aseguPropietario;
-	}
-
-	public Date getFechaIniPoliza() {
-		return fechaIniPoliza;
-	}
-
-	public void setFechaIniPoliza(Date fechaIniPoliza) {
-		this.fechaIniPoliza = fechaIniPoliza;
-	}
-
-	public Date getFechaFinPoliza() {
-		return fechaFinPoliza;
-	}
-
-	public void setFechaFinPoliza(Date fechaFinPoliza) {
-		this.fechaFinPoliza = fechaFinPoliza;
-	}
-
-	public String getRevision() {
-		return revision;
-	}
-
-	public void setRevision(String revision) {
-		this.revision = revision;
-	}
-
-	public String getTipoVivienda() {
-		return tipoVivienda;
-	}
-
-	public void setTipoVivienda(String tipoVivienda) {
-		this.tipoVivienda = tipoVivienda;
-	}
-
-	public String getTipoRevision() {
-		return tipoRevision;
-	}
-
-	public void setTipoRevision(String tipoRevision) {
-		this.tipoRevision = tipoRevision;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	public Integer getAnoConstrucion() {
-		return anoConstrucion;
-	}
-
-	public void setAnoConstrucion(Integer anoConstrucion) {
-		this.anoConstrucion = anoConstrucion;
-	}
-
-	public Integer getSuperficieVivienda() {
-		return superficieVivienda;
-	}
-
-	public void setSuperficieVivienda(Integer superficieVivienda) {
-		this.superficieVivienda = superficieVivienda;
-	}
-
-	public String getEstructura() {
-		return estructura;
-	}
-
-	public void setEstructura(String estructura) {
-		this.estructura = estructura;
-	}
-
-	public Integer getEdificaValoraReposicion() {
-		return edificaValoraReposicion;
-	}
-
-	public void setEdificaValoraReposicion(Integer edificaValoraReposicion) {
-		this.edificaValoraReposicion = edificaValoraReposicion;
-	}
-
-	public Integer getMobiliarioEnseres() {
-		return mobiliarioEnseres;
-	}
-
-	public void setMobiliarioEnseres(Integer mobiliarioEnseres) {
-		this.mobiliarioEnseres = mobiliarioEnseres;
-	}
-
-	public Integer getRcEdificacion() {
-		return rcEdificacion;
-	}
-
-	public void setRcEdificacion(Integer rcEdificacion) {
-		this.rcEdificacion = rcEdificacion;
-	}
-
-	public Boolean getActivo() {
-		return activo;
-	}
-
-	public void setActivo(Boolean activo) {
-		this.activo = activo;
-	}
-
-	
-	public Cliente getTomadorSeguro() {
-		return tomadorSeguro;
-}
-	  
-	  public void setTomadorSeguro(Cliente tomadorSeguro) { 
-		  this.tomadorSeguro =  tomadorSeguro;
-		  }
-
-	public Mediador getAsegurador() {
-		return asegurador;
-	}
-
-	public void setAsegurador(Mediador asegurador) {
-		this.asegurador = asegurador;
-	}
-	 
-	
-	
-	
-	
 	
 }

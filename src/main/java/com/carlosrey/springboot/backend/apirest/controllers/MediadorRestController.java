@@ -31,12 +31,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.carlosrey.springboot.backend.apirest.models.entity.Mediador;
 import com.carlosrey.springboot.backend.apirest.models.services.IMediadorService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Carlos Rey Silva 
  * https://github.com/carlos1811
  */
 
-
+@Slf4j
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
@@ -48,13 +50,13 @@ public class MediadorRestController {
 	@Autowired
 	private MessageSource messageSource;
 
-    private static final Logger logger = LoggerFactory.getLogger(MediadorRestController.class);
+    private static final Logger log = LoggerFactory.getLogger(MediadorRestController.class);
 
 	@GetMapping("/mediador")
 	public  List<Mediador> findAllMediador() 
 	
 	{
-		logger.info("inicio metodo index ");
+		log.info("inicio metodo index ");
 		List<Mediador> mediador = mediadorService.findAll();
 		return mediador;
 	}
@@ -66,7 +68,7 @@ public class MediadorRestController {
 	public  Page<Mediador> index(@PathVariable Integer page) 
 	
 	{
-		logger.info("inicio metodo index Paginacion ");
+		log.info("inicio metodo index Paginacion ");
 		Page<Mediador> mediador = mediadorService.findAll(PageRequest.of(page,4));
 		return mediador;
 	}
@@ -76,7 +78,7 @@ public class MediadorRestController {
 	@GetMapping("mediador/{id}")
 	public ResponseEntity<?> findByMediador(@PathVariable Long id)
 	{
-		logger.info("inicio metodo show ");
+		log.info("inicio metodo show ");
 		
 		Mediador mediador = null;
 		Map<String,Object> response = new HashMap<>();
@@ -104,7 +106,7 @@ public class MediadorRestController {
 	public ResponseEntity<?> create(@Valid @RequestBody Mediador mediador, BindingResult result)
 	{
 		
-		logger.info("inicio metodo create ");
+		log.info("inicio metodo create ");
 		
 		
 		Mediador mediadorNew = null;
@@ -150,7 +152,7 @@ public class MediadorRestController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> update(@RequestBody Mediador mediador,@PathVariable Long id)
 	{
-		logger.info("inicio metodo update ");
+		log.info("inicio metodo update ");
 		
 		Map<String,Object> response = new HashMap<>();
 		
@@ -187,7 +189,7 @@ public class MediadorRestController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<?> delete(@PathVariable Long id)
 	{
-		logger.info("inicio metodo delete ");
+		log.info("inicio metodo delete ");
 		
 		Map<String,Object> response = new HashMap<>();
 		

@@ -22,4 +22,5 @@ public class Publisher {
 		amqpTemplate.convertAndSend(exchange, routingKey, msg);
 		System.out.println("Send msg = " + msg);
 	}
+	
 }

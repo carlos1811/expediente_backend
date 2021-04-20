@@ -19,11 +19,16 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author Carlos Rey Silva 
  * https://github.com/carlos1811
  */
 
+@Setter
+@Getter
 @Entity
 @Table(name="mediador")
 public class Mediador implements Serializable {
@@ -71,101 +76,10 @@ public class Mediador implements Serializable {
 
 	}
 
-	
-
-
 	@PrePersist
 	public void prePersist(){
 		createAt = new Date();
 	}
-	
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	
-	public Long getIdMediador() {
-		return idMediador;
-	}
-
-
-	public void setIdMediador(Long idmediador) {
-		this.idMediador = idmediador;
-	}
-	
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Date getCreateAt() {
-		return createAt;
-	}
-
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-	
-	public Boolean getActivo() {
-		return activo;
-	}
-
-	public void setActivo(Boolean activo) {
-		this.activo = activo;
-	}
-
-	
-	public String getNif() {
-		return nif;
-	}
-
-	public void setNif(String nif) {
-		this.nif = nif;
-	}
-
-	public Integer getCodMediador() {
-		return codMediador;
-	}
-
-	public void setCodMediador(Integer codMediador) {
-		this.codMediador = codMediador;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	public Domicilio getDomicilio() {
-		return domicilio;
-	}
-
-	public void setDomicilio(Domicilio domicilio) {
-		this.domicilio = domicilio;
-	}
-
-
-
 
 	private static final long serialVersionUID = 1L;
 }

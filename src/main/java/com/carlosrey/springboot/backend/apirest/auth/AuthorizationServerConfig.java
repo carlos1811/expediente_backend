@@ -1,7 +1,6 @@
 package com.carlosrey.springboot.backend.apirest.auth;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +21,6 @@ import static org.springframework.security.jwt.codec.Codecs.utf8Encode;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-	private static final Logger logger = LoggerFactory.getLogger(AuthorizationServerConfig.class);
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;

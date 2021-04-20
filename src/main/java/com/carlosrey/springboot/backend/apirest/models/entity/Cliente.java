@@ -20,12 +20,16 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Getter;
+import lombok.Setter;
 /**
  * @author Carlos Rey Silva 
  * https://github.com/carlos1811
  */
 
-
+@Setter
+@Getter
 @Entity
 @Table(name="cliente")
 public class Cliente implements Serializable {
@@ -81,41 +85,6 @@ public class Cliente implements Serializable {
 		createAt = new Date();
 	}
 
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	
-	public Long getIdCliente() {
-		return idCliente;
-	}
-
-
-	public void setIdCliente(Long idCliente) {
-		this.idCliente = idCliente;
-	}
-	
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Date getCreateAt() {
-		return createAt;
-	}
-
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
 	/*
 	 * public List<Factura> getFacturas() { return facturas; }
 	 * 
@@ -123,56 +92,6 @@ public class Cliente implements Serializable {
 	 * public void setFacturas(List<Factura> facturas) { this.facturas = facturas; }
 	 */
 	
-	
-	public Boolean getActivo() {
-		return activo;
-	}
-
-
-	public void setActivo(Boolean activo) {
-		this.activo = activo;
-	}
-
-
-	public Date getFechaPrueba() {
-		return FechaPrueba;
-	}
-
-
-	public void setFechaPrueba(Date fechaPrueba) {
-		FechaPrueba = fechaPrueba;
-	}
-
-
-	public String getApellido() {
-		return apellido;
-	}
-
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-
-	public Domicilio getDomicilio() {
-		return domicilio;
-	}
-
-
-	public void setDomicilio(Domicilio domicilio) {
-		this.domicilio = domicilio;
-	}
-
-
-	public Provincia getProvincia() {
-		return provincia;
-	}
-
-
-	public void setProvincia(Provincia provincia) {
-		this.provincia = provincia;
-	}
-
 
 	private static final long serialVersionUID = 1L;
 }

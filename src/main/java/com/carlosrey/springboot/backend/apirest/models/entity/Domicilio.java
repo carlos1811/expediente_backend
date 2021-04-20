@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Setter
+@Getter
 @Entity
 public class Domicilio implements Serializable{
   private static final long serialVersionUID = 1L;
@@ -34,24 +40,6 @@ public class Domicilio implements Serializable{
   public Domicilio(Integer idDomicilio){
       this.idDomicilio = idDomicilio;
   }
-
-    public Integer getIdDomicilio() {
-        return idDomicilio;
-    }
-
-    public void setIdDomicilio(Integer idDomicilio) {
-        this.idDomicilio = idDomicilio;
-    }
-
-    public String getCalle() {
-        return calle;
-    }
-
-    public void setCalle(String calle) {
-        this.calle = calle;
-    }
-
-
 
     @Override
     public int hashCode() {

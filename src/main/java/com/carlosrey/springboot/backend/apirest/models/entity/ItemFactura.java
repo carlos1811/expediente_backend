@@ -4,6 +4,9 @@
 package com.carlosrey.springboot.backend.apirest.models.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,10 +17,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author carlos pc
  *
  */
+
+@Setter
+@Getter
 @Entity
 @Table(name="factura_items")
 public class ItemFactura implements Serializable{
@@ -33,21 +44,8 @@ public class ItemFactura implements Serializable{
 	private Producto producto;
 	
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Integer getCantidad() {
-		return cantidad;
-	}
-	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
-	}
-
-	
 	public Double calcularImporte() {
+		
 		return cantidad.doubleValue();
 		
 	}

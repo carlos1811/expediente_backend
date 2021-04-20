@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -28,11 +26,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.carlosrey.springboot.backend.apirest.models.entity.Sociedad;
 import com.carlosrey.springboot.backend.apirest.models.services.ISociedadService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Carlos Rey Silva 
  * https://github.com/carlos1811
  */
 
+@Slf4j
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
@@ -42,13 +43,11 @@ public class SociedadRestController {
 	@Autowired
 	private ISociedadService sociedadService;
 
-      private static final Logger logger = LoggerFactory.getLogger(SociedadRestController.class);
-
 	@GetMapping("/sociedad")
 	public  List<Sociedad> index() 
 	
 	{
-		logger.info("inicio metodo index ");
+		log.info("inicio metodo index ");
 		List<Sociedad> sociedad = sociedadService.findAll();
 		return sociedad;
 	}
@@ -56,7 +55,7 @@ public class SociedadRestController {
 	@GetMapping("sociedad/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id)
 	{
-		logger.info("inicio metodo show ");
+		log.info("inicio metodo show ");
 		
 		Sociedad sociedad = null;
 		Map<String,Object> response = new HashMap<>();
@@ -77,7 +76,7 @@ public class SociedadRestController {
 	public ResponseEntity<?> create(@Valid @RequestBody Sociedad sociedad, BindingResult result)
 	{
 		
-		logger.info("inicio metodo create ");
+		log.info("inicio metodo create ");
 		
 		
 		Sociedad sociedadNew = null;
@@ -113,7 +112,7 @@ public class SociedadRestController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> update(@RequestBody Sociedad sociedad,@PathVariable Long id)
 	{
-		logger.info("inicio metodo update ");
+		log.info("inicio metodo update ");
 		
 		Map<String,Object> response = new HashMap<>();
 		

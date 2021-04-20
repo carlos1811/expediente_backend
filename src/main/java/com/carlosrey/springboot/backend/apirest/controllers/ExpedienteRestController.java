@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -34,12 +32,14 @@ import com.carlosrey.springboot.backend.apirest.configuration.Config;
 import com.carlosrey.springboot.backend.apirest.models.entity.Expediente;
 import com.carlosrey.springboot.backend.apirest.models.services.IExpedienteService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Carlos Rey Silva 
  * https://github.com/carlos1811
  */
 
-
+@Slf4j
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
@@ -53,15 +53,12 @@ public class ExpedienteRestController {
     
 	@Autowired
 	private MessageSource messageSource;
-    
-	
-	private static final Logger logger = LoggerFactory.getLogger(ExpedienteRestController.class);
-
+ 
 	@GetMapping("/expediente")
 	public  List<Expediente> findAll() 
 	
 	{
-		logger.info("inicio metodo index ");
+		log.info("inicio metodo index ");
 		List<Expediente> expediente = expedienteService.findAll();
 		return expediente;
 	}
@@ -70,7 +67,7 @@ public class ExpedienteRestController {
 	public  Page<Expediente> findPage(@PathVariable Integer page) 
 	
 	{
-		logger.info("inicio metodo index Paginacion ");
+		log.info("inicio metodo index Paginacion ");
 		Page<Expediente> expediente = expedienteService.findAll(PageRequest.of(page,4));
 		return expediente;
 	}
@@ -80,7 +77,7 @@ public class ExpedienteRestController {
 	@GetMapping("expediente/{id}")
 	public ResponseEntity<?> findByExpediente(@PathVariable Long id)
 	{
-		logger.info("inicio metodo show ");
+		log.info("inicio metodo show ");
 		
 		Expediente expediente = null;
 		Map<String,Object> response = new HashMap<>();
@@ -106,7 +103,7 @@ public class ExpedienteRestController {
 	public ResponseEntity<?> create(@Valid @RequestBody Expediente expediente, BindingResult result)
 	{
 		
-		logger.info("inicio metodo create ");
+		log.info("inicio metodo create ");
 		
 		
 		Expediente expedienteNew = null;
@@ -151,7 +148,7 @@ public class ExpedienteRestController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> update(@RequestBody Expediente expediente,@PathVariable Long id)
 	{
-		logger.info("inicio metodo update ");
+		log.info("inicio metodo update ");
 		
 		Map<String,Object> response = new HashMap<>();
 		
@@ -204,7 +201,7 @@ public class ExpedienteRestController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<?> delete(@PathVariable Long id)
 	{
-		logger.info("inicio metodo delete ");
+		log.info("inicio metodo delete ");
 		
 		Map<String,Object> response = new HashMap<>();
 		

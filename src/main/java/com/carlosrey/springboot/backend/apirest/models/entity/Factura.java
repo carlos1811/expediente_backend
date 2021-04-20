@@ -23,6 +23,12 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Setter
+@Getter
 @Entity
 @Table(name="factura")
 public class Factura implements Serializable {
@@ -64,10 +70,6 @@ public class Factura implements Serializable {
     @ManyToOne(fetch=FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Expediente expediente;
-	
-	
-	
-	
 		
 	public Factura() {
 	
@@ -88,56 +90,6 @@ public class Factura implements Serializable {
 		this.idFactura = idFactura;
 	}
 	
-	
-	public Date getCreateAt() {
-		return createAt;
-	}
-
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-	
-	
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public String getObservacion() {
-		return observacion;
-	}
-
-	public void setObservacion(String observacion) {
-		this.observacion = observacion;
-	}
-
-	public Integer getImpuestos() {
-		return impuestos;
-	}
-
-	public void setImpuestos(Integer impuestos) {
-		this.impuestos = impuestos;
-	}
-
-	public Date getFechaFactura() {
-		return fechaFactura;
-	}
-
-	public void setFechaFactura(Date fechaFactura) {
-		this.fechaFactura = fechaFactura;
-	}
-
-	public List<ItemFactura> getItems() {
-		return items;
-	}
-
-	public void setItems(List<ItemFactura> items) {
-		this.items = items;
-	}
-
 	public Double getTotal() {
 		
 		Double total = 0.00;
