@@ -34,9 +34,6 @@ public class ClienteExtension implements Serializable {
 	public void setTextoArea(String textoArea) {
 		this.textoArea = textoArea;
 	}
-	
-   
-	
-	
+
 	
 }

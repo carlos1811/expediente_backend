@@ -31,10 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.carlosrey.springboot.backend.apirest.models.entity.Mediador;
 import com.carlosrey.springboot.backend.apirest.models.services.IMediadorService;
 
-/**
- * @author Carlos Rey Silva 
- * https://github.com/carlos1811
- */
+
 
 
 @CrossOrigin(origins = { "http://localhost:4200" })
@@ -58,20 +55,6 @@ public class MediadorRestController {
 		List<Mediador> mediador = mediadorService.findAll();
 		return mediador;
 	}
-	
-	
-	
-	/* Se comenta por si se utilizara en el futuro
-	@GetMapping("/mediador/page/{page}")
-	public  Page<Mediador> index(@PathVariable Integer page) 
-	
-	{
-		logger.info("inicio metodo index Paginacion ");
-		Page<Mediador> mediador = mediadorService.findAll(PageRequest.of(page,4));
-		return mediador;
-	}
-	*/
-	
 	
 	@GetMapping("mediador/{id}")
 	public ResponseEntity<?> findByMediador(@PathVariable Long id)
@@ -213,7 +196,4 @@ public class MediadorRestController {
 		response.put("mensaje", mensajeException);
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 	}
-	
-
-	
 }

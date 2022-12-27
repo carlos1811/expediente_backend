@@ -10,15 +10,15 @@ import com.carlosrey.springboot.backend.apirest.models.entity.Notificacion;
 public interface INotificationDao extends JpaRepository<Notificacion, Long>{
 
 	
-	public Notificacion findByTemplate(String templateType);
+	Notificacion findByTemplate(String templateType);
 	
 	
     @Query("from Notificacion n where n.templateType = ?1")
-	public Notificacion findByTemplateType(String TemplateType);
+    Notificacion findByTemplateType(String TemplateType);
 	
 	
 	@Query("from Notificacion ORDER BY id")
-	public List<Notificacion> findAll();
+    List<Notificacion> findAll();
 	
 	
 	

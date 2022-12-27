@@ -44,10 +44,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 
-/**
- * @author Carlos Rey Silva 
- * https://github.com/carlos1811
- */
+
 
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
@@ -231,44 +228,44 @@ public class ClienteRestController {
 	}
 
 	
-	@GetMapping("/clientes/exportar")
-	public ResponseEntity<?> report() throws JRException, ClassNotFoundException, SQLException
+//	@GetMapping("/clientes/exportar")
+//	public ResponseEntity<?> report() throws JRException, ClassNotFoundException, SQLException
+//
+//	{
+//		logger.info("inicio metodo report ");
+//
+//		Map<String, Object> response = new HashMap<>();
+//
+//		String pathReport = "C:/Users/carlos pc/JaspersoftWorkspace/MyReports/Invoice.jrxml";
+//
+//		try {
+//			// Compilar el fichero jrxml
+//			JasperReport report = JasperCompileManager.compileReport(pathReport);
+//
+//			// Rellenamos los parámetros del informe con valores
+//			Map<String, Object> parameters = new HashMap<>();
+//			parameters.put("the_image", "src/main/files/the_image.png");
+//
+//			// rellenamos el informe con datos y parámetros
+//			JasperPrint print = JasperFillManager.fillReport(report, parameters,
+//					config.getDataSource().getConnection());
+//
+//			String pathDestiny = "C:/Users/carlos pc/JaspersoftWorkspace/MyReports/Invoice" + LocalDate.now() + ".pdf";
+//
+//			JasperExportManager.exportReportToPdfFile(print, pathDestiny);
+//
+//		} catch (Exception e) {
+//
+//			response.put("mensaje", messageSource.getMessage("controller.mensaje1", null, LocaleContextHolder.getLocale()));
+//
+//			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+//		}
+//
+//		response.put("mensaje",messageSource.getMessage("controller.mensaje10", null, LocaleContextHolder.getLocale()));
+//
+//		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 
-	{
-		logger.info("inicio metodo report ");
-
-		Map<String, Object> response = new HashMap<>();
-
-		String pathReport = "C:/Users/carlos pc/JaspersoftWorkspace/MyReports/Invoice.jrxml";
-
-		try {
-			// Compilar el fichero jrxml
-			JasperReport report = JasperCompileManager.compileReport(pathReport);
-
-			// Rellenamos los parámetros del informe con valores
-			Map<String, Object> parameters = new HashMap<>();
-			parameters.put("the_image", "src/main/files/the_image.png");
-
-			// rellenamos el informe con datos y parámetros
-			JasperPrint print = JasperFillManager.fillReport(report, parameters,
-					config.getDataSource().getConnection());
-
-			String pathDestiny = "C:/Users/carlos pc/JaspersoftWorkspace/MyReports/Invoice" + LocalDate.now() + ".pdf";
-
-			JasperExportManager.exportReportToPdfFile(print, pathDestiny);
-
-		} catch (Exception e) {
-
-			response.put("mensaje", messageSource.getMessage("controller.mensaje1", null, LocaleContextHolder.getLocale()));
-
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
-		}
-	
-		response.put("mensaje",messageSource.getMessage("controller.mensaje10", null, LocaleContextHolder.getLocale()));
-
-		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
-
-	}
+//	}
 	
 //	@PostMapping("email")
 //	@ResponseStatus(HttpStatus.OK)
@@ -314,8 +311,7 @@ public class ClienteRestController {
 //	}
 
 	
-	
-	
+
 	@GetMapping("/clientes/templates")
 	public List<Notificacion> templatesAll()
 

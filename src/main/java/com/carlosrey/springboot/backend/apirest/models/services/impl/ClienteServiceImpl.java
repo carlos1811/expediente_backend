@@ -15,10 +15,7 @@ import com.carlosrey.springboot.backend.apirest.models.dao.INotificationDao;
 import com.carlosrey.springboot.backend.apirest.models.entity.Cliente;
 import com.carlosrey.springboot.backend.apirest.models.entity.Notificacion;
 import com.carlosrey.springboot.backend.apirest.models.services.IClienteService;
-/**
- * @author Carlos Rey Silva 
- * https://github.com/carlos1811
- */
+
 @Service
 public class ClienteServiceImpl implements IClienteService{
 
@@ -36,7 +33,7 @@ public class ClienteServiceImpl implements IClienteService{
 	public List<Cliente> findAll() {
 		logger.info("inicio metodo findAll ");
 		
-		return (List<Cliente>) clienteDao.findAll();
+		return clienteDao.findAll();
 	}
 
 	@Override
@@ -44,7 +41,7 @@ public class ClienteServiceImpl implements IClienteService{
 	public List<Cliente> findAllCombo() {
 		logger.info("inicio metodo findAllCombo ");
 		
-		return (List<Cliente>) clienteDao.findByActiveTrue();
+		return clienteDao.findByActiveTrue();
 	}
 	
 	
@@ -83,7 +80,7 @@ public class ClienteServiceImpl implements IClienteService{
 	public List<Notificacion> findAllTemplates() {
 		logger.info("inicio metodo delete ");
 		
-		return (List<Notificacion>) notificationDao.findAll();
+		return notificationDao.findAll();
 	}
 
 

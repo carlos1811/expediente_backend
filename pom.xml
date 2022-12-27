@@ -63,11 +63,11 @@ Ejemplo Backend Dessarrollo  -->
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>net.sf.jasperreports</groupId>
-			<artifactId>jasperreports</artifactId>
-			<version>6.4.0</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>net.sf.jasperreports</groupId>-->
+<!--			<artifactId>jasperreports</artifactId>-->
+<!--			<version>6.4.0</version>-->
+<!--		</dependency>-->
 		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -107,8 +107,14 @@ Ejemplo Backend Dessarrollo  -->
 			<artifactId>spring-security-jwt</artifactId>
 			<version>1.0.9.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.12</version>
+			<scope>provided</scope>
+		</dependency>
 
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<plugins>

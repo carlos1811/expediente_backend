@@ -11,7 +11,7 @@ public interface IClienteDao extends	JpaRepository<Cliente, Long>{
 
 
 	@Query("from Cliente c where c.activo = true ORDER BY id")
-	public List<Cliente> findByActiveTrue();
+    List<Cliente> findByActiveTrue();
 	
 	
 }

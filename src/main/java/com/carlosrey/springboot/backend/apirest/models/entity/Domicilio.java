@@ -72,10 +72,7 @@ public class Domicilio implements Serializable{
             return false;
         }
         final Domicilio other = (Domicilio) obj;
-        if (!Objects.equals(this.idDomicilio, other.idDomicilio)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.idDomicilio, other.idDomicilio);
     }
   
   

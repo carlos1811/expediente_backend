@@ -20,10 +20,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-/**
- * @author Carlos Rey Silva 
- * https://github.com/carlos1811
- */
+
 
 
 @Entity

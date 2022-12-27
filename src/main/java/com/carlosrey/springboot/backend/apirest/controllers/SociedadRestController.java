@@ -28,10 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.carlosrey.springboot.backend.apirest.models.entity.Sociedad;
 import com.carlosrey.springboot.backend.apirest.models.services.ISociedadService;
 
-/**
- * @author Carlos Rey Silva 
- * https://github.com/carlos1811
- */
+
 
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController

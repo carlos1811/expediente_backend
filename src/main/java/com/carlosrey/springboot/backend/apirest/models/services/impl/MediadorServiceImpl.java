@@ -14,10 +14,7 @@ import com.carlosrey.springboot.backend.apirest.models.dao.IMediadorDao;
 import com.carlosrey.springboot.backend.apirest.models.entity.Mediador;
 import com.carlosrey.springboot.backend.apirest.models.services.IMediadorService;
 
-/**
- * @author Carlos Rey Silva 
- * https://github.com/carlos1811
- */
+
 
 @Service
 public class MediadorServiceImpl implements IMediadorService{
@@ -32,7 +29,7 @@ public class MediadorServiceImpl implements IMediadorService{
 	public List<Mediador> findAll() {
 		logger.info("inicio metodo findAll ");
 		
-		return (List<Mediador>) mediadorDao.findAll();
+		return mediadorDao.findAll();
 	}
 
 	@Override

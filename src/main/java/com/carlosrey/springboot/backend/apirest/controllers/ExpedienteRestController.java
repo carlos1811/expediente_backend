@@ -34,10 +34,7 @@ import com.carlosrey.springboot.backend.apirest.configuration.Config;
 import com.carlosrey.springboot.backend.apirest.models.entity.Expediente;
 import com.carlosrey.springboot.backend.apirest.models.services.IExpedienteService;
 
-/**
- * @author Carlos Rey Silva 
- * https://github.com/carlos1811
- */
+
 
 
 @CrossOrigin(origins = { "http://localhost:4200" })

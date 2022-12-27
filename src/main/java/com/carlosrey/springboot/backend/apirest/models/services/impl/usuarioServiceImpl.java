@@ -18,10 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.carlosrey.springboot.backend.apirest.models.dao.IUsuarioDao;
 import com.carlosrey.springboot.backend.apirest.models.entity.Usuario;
 import com.carlosrey.springboot.backend.apirest.models.services.IUsuarioService;
-/**
- * @author Carlos Rey Silva 
- * https://github.com/carlos1811
- */
+
 @Service
 public class usuarioServiceImpl implements IUsuarioService,UserDetailsService {
 
@@ -29,7 +26,7 @@ public class usuarioServiceImpl implements IUsuarioService,UserDetailsService {
 	@Autowired
 	private IUsuarioDao usuarioDao;
 	
-	private Logger logger = LoggerFactory.getLogger(usuarioServiceImpl.class);
+	private final Logger logger = LoggerFactory.getLogger(usuarioServiceImpl.class);
 	
 	@Override
 	@Transactional(readOnly=true)	

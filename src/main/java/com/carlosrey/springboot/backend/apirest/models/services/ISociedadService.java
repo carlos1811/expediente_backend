@@ -6,12 +6,12 @@ import com.carlosrey.springboot.backend.apirest.models.entity.Sociedad;
 
 public interface ISociedadService {
 	
-	public List<Sociedad> findAll();
+	List<Sociedad> findAll();
 	
-	public Sociedad findById(Long id);
+	Sociedad findById(Long id);
 	
-	public Sociedad save(Sociedad sociedad);
+	Sociedad save(Sociedad sociedad);
 	
-	public void delete(Long id);
+	void delete(Long id);
 
 }

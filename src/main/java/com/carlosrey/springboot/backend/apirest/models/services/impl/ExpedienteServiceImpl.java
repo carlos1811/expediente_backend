@@ -2,8 +2,7 @@ package com.carlosrey.springboot.backend.apirest.models.services.impl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,50 +16,47 @@ import com.carlosrey.springboot.backend.apirest.models.services.IExpedienteServi
 /**
  * @author Carlos Rey Silva https://github.com/carlos1811
  */
-
+@Slf4j
 @Service
 public class ExpedienteServiceImpl implements IExpedienteService {
 
 	@Autowired
-	private IExpedienteDao ExpedienteDao;
-
-	private static final Logger logger = LoggerFactory.getLogger(ExpedienteServiceImpl.class);
+	private IExpedienteDao expedienteDao;
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<Expediente> findAll() {
-		logger.info("inicio metodo findAll ");
+		log.info("inicio metodo findAll ");
 
-		return (List<Expediente>) ExpedienteDao.findAll();
+		return expedienteDao.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Page<Expediente> findAll(Pageable pageable) {
-		logger.info("inicio metodo findAll ");
+		log.info("inicio metodo findAll ");
 
-		return ExpedienteDao.findAll(pageable);
+		return expedienteDao.findAll(pageable);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Expediente findById(Long id) {
-		logger.info("inicio metodo findById ");
-		return ExpedienteDao.findById(id).orElse(null);
+		log.info("inicio metodo findById ");
+		return expedienteDao.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
-	public Expediente save(Expediente Expediente) {
-		logger.info("inicio metodo save ");
-		return ExpedienteDao.save(Expediente);
+	public Expediente save(Expediente expediente) {
+		log.info("inicio metodo save ");
+		return expedienteDao.save(expediente);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		logger.info("inicio metodo delete ");
-		ExpedienteDao.deleteById(id);
+		log.info("inicio metodo delete ");
+		expedienteDao.deleteById(id);
 	}
-
 }
